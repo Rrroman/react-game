@@ -10,7 +10,7 @@ class App extends Component {
       [6, 0],
     ],
     direction: 'RIGHT',
-    speed: 150,
+    speed: 500,
   };
 
   componentDidMount() {
@@ -20,26 +20,34 @@ class App extends Component {
 
   componentDidUpdate() {
     this.checkWallSmash();
+    this.checkSnakeBiteItSelf();
   }
 
   keydownHandler(event) {
-    console.log(event.keyCode);
     switch (event.keyCode) {
       case 37:
       case 65:
-        this.setState({ direction: 'LEFT' });
+        if (this.state.direction !== 'RIGHT') {
+          this.setState({ direction: 'LEFT' });
+        }
         break;
       case 38:
       case 87:
-        this.setState({ direction: 'TOP' });
+        if (this.state.direction !== 'BOTTOM') {
+          this.setState({ direction: 'TOP' });
+        }
         break;
       case 39:
       case 68:
-        this.setState({ direction: 'RIGHT' });
+        if (this.state.direction !== 'LEFT') {
+          this.setState({ direction: 'RIGHT' });
+        }
         break;
       case 40:
       case 83:
-        this.setState({ direction: 'BOTTOM' });
+        if (this.state.direction !== 'TOP') {
+          this.setState({ direction: 'BOTTOM' });
+        }
         break;
       default:
     }
@@ -48,7 +56,6 @@ class App extends Component {
   moveSnake = () => {
     const snakeCoordinates = [...this.state.snakePosition];
     let headCoordinates = snakeCoordinates[snakeCoordinates.length - 1];
-    console.log(headCoordinates);
 
     switch (this.state.direction) {
       case 'LEFT':
@@ -89,13 +96,30 @@ class App extends Component {
     }
   };
 
+  checkSnakeBiteItSelf = () => {
+    const snakeCoordinates = [...this.state.snakePosition];
+
+    const headCoordinates = snakeCoordinates[snakeCoordinates.length - 1];
+
+    snakeCoordinates.pop();
+
+    snakeCoordinates.forEach((snakePieces) => {
+      if (
+        headCoordinates[0] === snakePieces[0] &&
+        headCoordinates[1] === snakePieces[1]
+      ) {
+        this.gameOver();
+      }
+    });
+  };
+
   gameOver = () => {
     alert('Game Over');
     this.setState({
       snakePosition: [
         [0, 0],
-        [0, 0],
-        [0, 0],
+        [3, 0],
+        [6, 0],
       ],
       direction: 'RIGHT',
     });

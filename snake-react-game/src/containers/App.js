@@ -4,15 +4,17 @@ import Snake from '../components/Snake/Snake';
 
 class App extends Component {
   state = {
-    direction: 'TOP',
-    snakeStartPosition: [
-      [49, 77],
-      [49, 75],
-      [49, 73],
+    snakePosition: [
+      [0, 0],
+      [0, 0],
+      [0, 0],
     ],
+    direction: 'RIGHT',
+    speed: 150,
   };
 
   componentDidMount() {
+    setInterval(this.moveSnake, this.state.speed);
     window.addEventListener('keydown', this.keydownHandler.bind(this));
   }
 
@@ -20,27 +22,59 @@ class App extends Component {
     console.log(event.keyCode);
     switch (event.keyCode) {
       case 37:
+      case 65:
         this.setState({ direction: 'LEFT' });
         break;
       case 38:
+      case 87:
         this.setState({ direction: 'TOP' });
         break;
       case 39:
+      case 68:
         this.setState({ direction: 'RIGHT' });
         break;
       case 40:
+      case 83:
         this.setState({ direction: 'BOTTOM' });
         break;
       default:
-        return;
     }
   }
+
+  moveSnake = () => {
+    const snakeCoordinates = [...this.state.snakePosition];
+    let headCoordinates = snakeCoordinates[snakeCoordinates.length - 1];
+    console.log(headCoordinates);
+
+    switch (this.state.direction) {
+      case 'LEFT':
+        headCoordinates = [headCoordinates[0] - 3, headCoordinates[1]];
+        break;
+      case 'TOP':
+        headCoordinates = [headCoordinates[0], headCoordinates[1] - 3];
+        break;
+      case 'RIGHT':
+        headCoordinates = [headCoordinates[0] + 3, headCoordinates[1]];
+        break;
+      case 'BOTTOM':
+        headCoordinates = [headCoordinates[0], headCoordinates[1] + 3];
+        break;
+      default:
+    }
+
+    snakeCoordinates.push(headCoordinates);
+    snakeCoordinates.shift();
+
+    this.setState({
+      snakePosition: snakeCoordinates,
+    });
+  };
 
   render() {
     return (
       <div className={classes.app}>
         <div className={classes.app__field}>
-          <Snake snakeStartPosition={this.state.snakeStartPosition} />
+          <Snake snakePosition={this.state.snakePosition} />
         </div>
       </div>
     );

@@ -1,0 +1,12 @@
+.app {
+  text-align: center;
+}
+
+.app__field {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  margin: 100px auto;
+  border: 3px solid #1166aa;
+  border-radius: 8px;
+}

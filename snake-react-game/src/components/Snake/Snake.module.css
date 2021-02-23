@@ -1,8 +1,9 @@
 .snake__piece {
   position: absolute;
-  width: 3.7%;
-  height: 3.7%;
+  width: 4%;
+  height: 4%;
   background-color: forestgreen;
   border: 1px solid black;
   border-radius: 50%;
+  z-index: 20;
 }

@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
 import Snake from '../components/Snake/Snake';
+import Fruit from '../components/Fruit/Fruit';
+import constants from '../constants/constants';
 
 class App extends Component {
   state = {
     snakePosition: [
       [0, 0],
-      [3, 0],
-      [6, 0],
+      [0, 0],
+      [0, 0],
     ],
-    direction: 'RIGHT',
-    speed: 500,
+    direction: constants.RIGHT,
+    speed: constants.SPEED,
+    fruitPosition:
+      (Math.floor(Math.random() * constants.MAX_FRUIT_POSITION) /
+        constants.SIZE) *
+      constants.SIZE,
   };
 
   componentDidMount() {
@@ -21,32 +27,37 @@ class App extends Component {
   componentDidUpdate() {
     this.checkWallSmash();
     this.checkSnakeBiteItSelf();
+    console.log(this.state.fruitPosition);
   }
+
+  spawnFruit = () => {
+    return;
+  };
 
   keydownHandler(event) {
     switch (event.keyCode) {
       case 37:
       case 65:
-        if (this.state.direction !== 'RIGHT') {
-          this.setState({ direction: 'LEFT' });
+        if (this.state.direction !== constants.RIGHT) {
+          this.setState({ direction: constants.LEFT });
         }
         break;
       case 38:
       case 87:
-        if (this.state.direction !== 'BOTTOM') {
-          this.setState({ direction: 'TOP' });
+        if (this.state.direction !== constants.BOTTOM) {
+          this.setState({ direction: constants.TOP });
         }
         break;
       case 39:
       case 68:
-        if (this.state.direction !== 'LEFT') {
-          this.setState({ direction: 'RIGHT' });
+        if (this.state.direction !== constants.LEFT) {
+          this.setState({ direction: constants.RIGHT });
         }
         break;
       case 40:
       case 83:
-        if (this.state.direction !== 'TOP') {
-          this.setState({ direction: 'BOTTOM' });
+        if (this.state.direction !== constants.TOP) {
+          this.setState({ direction: constants.BOTTOM });
         }
         break;
       default:
@@ -58,17 +69,29 @@ class App extends Component {
     let headCoordinates = snakeCoordinates[snakeCoordinates.length - 1];
 
     switch (this.state.direction) {
-      case 'LEFT':
-        headCoordinates = [headCoordinates[0] - 3, headCoordinates[1]];
+      case constants.LEFT:
+        headCoordinates = [
+          headCoordinates[0] - constants.SPACE_BETWEEN_SNAKE_PIECES,
+          headCoordinates[1],
+        ];
         break;
-      case 'TOP':
-        headCoordinates = [headCoordinates[0], headCoordinates[1] - 3];
+      case constants.TOP:
+        headCoordinates = [
+          headCoordinates[0],
+          headCoordinates[1] - constants.SPACE_BETWEEN_SNAKE_PIECES,
+        ];
         break;
-      case 'RIGHT':
-        headCoordinates = [headCoordinates[0] + 3, headCoordinates[1]];
+      case constants.RIGHT:
+        headCoordinates = [
+          headCoordinates[0] + constants.SPACE_BETWEEN_SNAKE_PIECES,
+          headCoordinates[1],
+        ];
         break;
-      case 'BOTTOM':
-        headCoordinates = [headCoordinates[0], headCoordinates[1] + 3];
+      case constants.BOTTOM:
+        headCoordinates = [
+          headCoordinates[0],
+          headCoordinates[1] + constants.SPACE_BETWEEN_SNAKE_PIECES,
+        ];
         break;
       default:
     }
@@ -121,7 +144,7 @@ class App extends Component {
         [3, 0],
         [6, 0],
       ],
-      direction: 'RIGHT',
+      direction: constants.RIGHT,
     });
   };
 
@@ -130,6 +153,7 @@ class App extends Component {
       <div className={classes.app}>
         <div className={classes.app__field}>
           <Snake snakePosition={this.state.snakePosition} />
+          <Fruit fruitPosition={this.state.fruitPosition} />
         </div>
       </div>
     );

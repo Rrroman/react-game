@@ -15,19 +15,11 @@ const constants = {
   ],
   FRUIT_POSITION: () => [
     Math.floor(
-      (Math.random() *
-        (constants.MAX_POSITION -
-          constants.MIN_POSITION +
-          constants.MIN_POSITION) +
-        constants.MIN_POSITION) /
+      (Math.random() * constants.MAX_POSITION + constants.MIN_POSITION) /
         constants.SIZE,
     ) * constants.SIZE,
     Math.floor(
-      (Math.random() *
-        (constants.MAX_POSITION -
-          constants.MIN_POSITION +
-          constants.MIN_POSITION) +
-        constants.MIN_POSITION) /
+      (Math.random() * constants.MAX_POSITION + constants.MIN_POSITION) /
         constants.SIZE,
     ) * constants.SIZE,
   ],

@@ -6,17 +6,10 @@ import constants from '../constants/constants';
 
 class App extends Component {
   state = {
-    snakePosition: [
-      [0, 0],
-      [0, 0],
-      [0, 0],
-    ],
+    snakePosition: constants.STARTING_SNAKE_POSITION,
     direction: constants.RIGHT,
     speed: constants.SPEED,
-    fruitPosition:
-      (Math.floor(Math.random() * constants.MAX_FRUIT_POSITION) /
-        constants.SIZE) *
-      constants.SIZE,
+    fruitPosition: constants.FRUIT_POSITION(),
   };
 
   componentDidMount() {
@@ -27,12 +20,8 @@ class App extends Component {
   componentDidUpdate() {
     this.checkWallSmash();
     this.checkSnakeBiteItSelf();
-    console.log(this.state.fruitPosition);
+    this.checkEatFruit();
   }
-
-  spawnFruit = () => {
-    return;
-  };
 
   keydownHandler(event) {
     switch (event.keyCode) {
@@ -111,9 +100,9 @@ class App extends Component {
 
     if (
       headCoordinates[0] < 0 ||
-      headCoordinates[0] >= 99 ||
+      headCoordinates[0] >= 98 ||
       headCoordinates[1] < 0 ||
-      headCoordinates[1] >= 99
+      headCoordinates[1] >= 98
     ) {
       this.gameOver();
     }
@@ -121,7 +110,6 @@ class App extends Component {
 
   checkSnakeBiteItSelf = () => {
     const snakeCoordinates = [...this.state.snakePosition];
-
     const headCoordinates = snakeCoordinates[snakeCoordinates.length - 1];
 
     snakeCoordinates.pop();
@@ -136,14 +124,39 @@ class App extends Component {
     });
   };
 
+  checkEatFruit = () => {
+    const headCoordinates = this.state.snakePosition[
+      this.state.snakePosition.length - 1
+    ];
+    const fruitCoordinates = this.state.fruitPosition;
+
+    if (
+      headCoordinates[0] === fruitCoordinates[0] &&
+      headCoordinates[1] === fruitCoordinates[1]
+    ) {
+      this.setState({
+        fruitPosition: constants.FRUIT_POSITION(),
+      });
+
+      this.snakeGrow();
+    }
+  };
+
+  snakeGrow = () => {
+    const snakeCoordinates = [...this.state.snakePosition];
+
+    snakeCoordinates.unshift([]);
+
+    this.setState({
+      snakePosition: snakeCoordinates,
+    });
+    console.log('Growing');
+  };
+
   gameOver = () => {
     alert('Game Over');
     this.setState({
-      snakePosition: [
-        [0, 0],
-        [3, 0],
-        [6, 0],
-      ],
+      snakePosition: constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
     });
   };

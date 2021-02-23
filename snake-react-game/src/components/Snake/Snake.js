@@ -4,15 +4,15 @@ import classes from './Snake.module.css';
 const Snake = (props) => {
   return (
     <div>
-      {props.snakePosition.map((cell, index) => {
+      {props.snakePosition.map((snakePiece, index) => {
         const StartPositionStyles = {
-          left: `${cell[0]}%`,
-          top: `${cell[1]}%`,
+          left: `${snakePiece[0]}%`,
+          top: `${snakePiece[1]}%`,
         };
         return (
           <div
             key={index}
-            className={classes.snake__cell}
+            className={classes.snake__piece}
             style={StartPositionStyles}
           ></div>
         );

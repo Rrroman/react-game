@@ -6,8 +6,8 @@ class App extends Component {
   state = {
     snakePosition: [
       [0, 0],
-      [0, 0],
-      [0, 0],
+      [3, 0],
+      [6, 0],
     ],
     direction: 'RIGHT',
     speed: 150,
@@ -16,6 +16,10 @@ class App extends Component {
   componentDidMount() {
     setInterval(this.moveSnake, this.state.speed);
     window.addEventListener('keydown', this.keydownHandler.bind(this));
+  }
+
+  componentDidUpdate() {
+    this.checkWallSmash();
   }
 
   keydownHandler(event) {
@@ -67,6 +71,33 @@ class App extends Component {
 
     this.setState({
       snakePosition: snakeCoordinates,
+    });
+  };
+
+  checkWallSmash = () => {
+    const headCoordinates = this.state.snakePosition[
+      this.state.snakePosition.length - 1
+    ];
+
+    if (
+      headCoordinates[0] < 0 ||
+      headCoordinates[0] >= 99 ||
+      headCoordinates[1] < 0 ||
+      headCoordinates[1] >= 99
+    ) {
+      this.gameOver();
+    }
+  };
+
+  gameOver = () => {
+    alert('Game Over');
+    this.setState({
+      snakePosition: [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ],
+      direction: 'RIGHT',
     });
   };
 

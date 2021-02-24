@@ -12,8 +12,9 @@ class App extends Component {
     direction: constants.RIGHT,
     speed: constants.SPEED,
     fruitPosition: constants.FRUIT_POSITION(),
-    gameOver: false,
+    gameOver: true,
     gamePause: true,
+    score: 0,
   };
 
   componentDidMount() {
@@ -93,12 +94,12 @@ class App extends Component {
   }
 
   gamePauseToggle = () => {
-    if (this.state.gamePause) {
+    if (!this.state.gameOver && this.state.gamePause) {
       clearInterval(this.state.intervalId);
       this.setState({
         gamePause: true,
       });
-    } else {
+    } else if (!this.state.gameOver) {
       const newIntervalId = setInterval(this.moveSnake, this.state.speed);
 
       this.setState({
@@ -209,11 +210,13 @@ class App extends Component {
           return {
             fruitPosition: constants.FRUIT_POSITION(),
             speed: prevState.speed - constants.SPEED_STEP,
+            score: this.state.snakePosition.length * constants.SPEED_STEP,
           };
         } else {
           return {
             fruitPosition: constants.FRUIT_POSITION(),
             speed: prevState.speed - 1,
+            score: prevState.snakePosition.length * constants.SPEED_STEP,
           };
         }
       });
@@ -258,12 +261,13 @@ class App extends Component {
   };
 
   startGameHandler = () => {
-    if (this.state.gamePause) {
+    if (this.state.gameOver) {
       const intervalId = setInterval(this.moveSnake, this.state.speed);
       this.setState({
         intervalId: intervalId,
         gameOver: false,
         gamePause: false,
+        score: 0,
       });
     }
   };
@@ -276,7 +280,10 @@ class App extends Component {
   render() {
     return (
       <div className={classes.app}>
-        <Controls clicked={this.startGameHandler.bind(this)} />
+        <Controls
+          clicked={this.startGameHandler.bind(this)}
+          score={this.state.score}
+        />
         <div className={classes.app__field} style={this.fieldStyles}>
           <Snake
             snakePosition={this.state.snakePosition}

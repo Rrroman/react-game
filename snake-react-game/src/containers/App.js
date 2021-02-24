@@ -253,11 +253,6 @@ class App extends Component {
     });
 
     clearInterval(this.state.intervalId);
-    // alert(
-    //   `Good Game! Your Score: ${
-    //     this.state.snakePosition.length * constants.SPEED_STEP
-    //   }`,
-    // );
   };
 
   startGameHandler = () => {

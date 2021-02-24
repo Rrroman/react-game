@@ -10,10 +10,12 @@ class App extends Component {
     direction: constants.RIGHT,
     speed: constants.SPEED,
     fruitPosition: constants.FRUIT_POSITION(),
+    gameOver: false,
   };
 
   componentDidMount() {
-    setInterval(this.moveSnake, this.state.speed);
+    const intervalId = setInterval(this.moveSnake, this.state.speed);
+    this.setState({ intervalId: intervalId });
     window.addEventListener('keydown', this.keydownHandler.bind(this));
   }
 
@@ -28,32 +30,50 @@ class App extends Component {
       case 37:
       case 65:
         if (this.state.direction !== constants.RIGHT) {
-          this.setState({ direction: constants.LEFT });
+          this.setDirection(constants.LEFT);
         }
+        this.moveSnake();
         break;
       case 38:
       case 87:
         if (this.state.direction !== constants.BOTTOM) {
           this.setState({ direction: constants.TOP });
         }
+        this.moveSnake();
         break;
       case 39:
       case 68:
         if (this.state.direction !== constants.LEFT) {
           this.setState({ direction: constants.RIGHT });
         }
+        this.moveSnake();
         break;
       case 40:
       case 83:
         if (this.state.direction !== constants.TOP) {
           this.setState({ direction: constants.BOTTOM });
         }
+        this.moveSnake();
         break;
       default:
     }
   }
 
+  setDirection(direction) {
+    this.setState({ direction: direction });
+  }
+
   moveSnake = () => {
+    if (this.state.gameOver) {
+      const newIntervalId = setInterval(this.moveSnake, this.state.speed);
+
+      this.setState({
+        intervalId: newIntervalId,
+        gameOver: false,
+        speed: constants.SPEED,
+      });
+    }
+
     const snakeCoordinates = [...this.state.snakePosition];
     let headCoordinates = snakeCoordinates[snakeCoordinates.length - 1];
 
@@ -150,15 +170,17 @@ class App extends Component {
     this.setState({
       snakePosition: snakeCoordinates,
     });
-    console.log('Growing');
   };
 
   gameOver = () => {
-    alert('Game Over');
     this.setState({
       snakePosition: constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
+      gameOver: true,
     });
+
+    clearInterval(this.state.intervalId);
+    alert(`Game Over! Your Score: ${this.state.snakePosition.length}`);
   };
 
   render() {

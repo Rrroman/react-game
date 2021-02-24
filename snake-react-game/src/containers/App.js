@@ -3,6 +3,7 @@ import classes from './App.module.css';
 import Snake from '../components/Snake/Snake';
 import Fruit from '../components/Fruit/Fruit';
 import constants from '../constants/constants';
+import Controls from '../components/Controls/Controls';
 
 class App extends Component {
   state = {
@@ -11,12 +12,10 @@ class App extends Component {
     speed: constants.SPEED,
     fruitPosition: constants.FRUIT_POSITION(),
     gameOver: false,
-    gamePause: false,
+    gamePause: true,
   };
 
   componentDidMount() {
-    const intervalId = setInterval(this.moveSnake, this.state.speed);
-    this.setState({ intervalId: intervalId });
     window.addEventListener('keydown', this.keydownHandler.bind(this));
   }
 
@@ -37,7 +36,11 @@ class App extends Component {
     switch (event.keyCode) {
       case 37:
       case 65:
-        if (this.state.direction !== constants.RIGHT && !this.state.gamePause) {
+        if (
+          this.state.direction !== constants.RIGHT &&
+          !this.state.gamePause &&
+          !this.state.gameOver
+        ) {
           this.setDirection(constants.LEFT);
           this.moveSnake();
         }
@@ -46,7 +49,8 @@ class App extends Component {
       case 87:
         if (
           this.state.direction !== constants.BOTTOM &&
-          !this.state.gamePause
+          !this.state.gamePause &&
+          !this.state.gameOver
         ) {
           this.setState({ direction: constants.TOP });
           this.moveSnake();
@@ -54,14 +58,22 @@ class App extends Component {
         break;
       case 39:
       case 68:
-        if (this.state.direction !== constants.LEFT && !this.state.gamePause) {
+        if (
+          this.state.direction !== constants.LEFT &&
+          !this.state.gamePause &&
+          !this.state.gameOver
+        ) {
           this.setState({ direction: constants.RIGHT });
           this.moveSnake();
         }
         break;
       case 40:
       case 83:
-        if (this.state.direction !== constants.TOP && !this.state.gamePause) {
+        if (
+          this.state.direction !== constants.TOP &&
+          !this.state.gamePause &&
+          !this.state.gameOver
+        ) {
           this.setState({ direction: constants.BOTTOM });
           this.moveSnake();
         }
@@ -157,9 +169,9 @@ class App extends Component {
 
     if (
       headCoordinates[0] < 0 ||
-      headCoordinates[0] >= 98 ||
+      headCoordinates[0] >= constants.MAX_POSITION ||
       headCoordinates[1] < 0 ||
-      headCoordinates[1] >= 98
+      headCoordinates[1] >= constants.MAX_POSITION
     ) {
       this.gameOver();
     }
@@ -192,10 +204,10 @@ class App extends Component {
       headCoordinates[1] === fruitCoordinates[1]
     ) {
       this.setState((prevState) => {
-        if (prevState.speed > 50) {
+        if (prevState.speed > constants.SPEED_FAST) {
           return {
             fruitPosition: constants.FRUIT_POSITION(),
-            speed: prevState.speed - 10,
+            speed: prevState.speed - constants.SPEED_STEP,
           };
         } else {
           return {
@@ -230,15 +242,32 @@ class App extends Component {
       direction: constants.RIGHT,
       speed: constants.SPEED,
       gameOver: true,
+      gamePause: true,
     });
 
     clearInterval(this.state.intervalId);
-    alert(`Game Over! Your Score: ${this.state.snakePosition.length * 10}`);
+    // alert(
+    //   `Good Game! Your Score: ${
+    //     this.state.snakePosition.length * constants.SPEED_STEP
+    //   }`,
+    // );
+  };
+
+  startGameHandler = () => {
+    if (this.state.gamePause) {
+      const intervalId = setInterval(this.moveSnake, this.state.speed);
+      this.setState({
+        intervalId: intervalId,
+        gameOver: false,
+        gamePause: false,
+      });
+    }
   };
 
   render() {
     return (
       <div className={classes.app}>
+        <Controls clicked={this.startGameHandler.bind(this)} />
         <div className={classes.app__field}>
           <Snake
             snakePosition={this.state.snakePosition}

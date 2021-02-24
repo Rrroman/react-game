@@ -3,8 +3,8 @@
   width: 4%;
   height: 4%;
   background: radial-gradient(circle 50px, red, yellow 10%, #1e90ff 50%, beige);
-  /* border: 1px solid black; */
   border-radius: 50%;
+  box-shadow: 1px 1px 5px 1px rgba(46, 46, 85, 0.2);
   z-index: 20;
 }
 

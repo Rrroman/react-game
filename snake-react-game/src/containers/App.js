@@ -65,6 +65,7 @@ class App extends Component {
 
   moveSnake = () => {
     if (this.state.gameOver) {
+      clearInterval(this.state.intervalId);
       const newIntervalId = setInterval(this.moveSnake, this.state.speed);
 
       this.setState({
@@ -154,9 +155,27 @@ class App extends Component {
       headCoordinates[0] === fruitCoordinates[0] &&
       headCoordinates[1] === fruitCoordinates[1]
     ) {
-      this.setState({
-        fruitPosition: constants.FRUIT_POSITION(),
+      // this.setState({
+      //   fruitPosition: constants.FRUIT_POSITION(),
+      // });
+      this.setState((prevState) => {
+        if (prevState.speed > 50) {
+          return {
+            fruitPosition: constants.FRUIT_POSITION(),
+            speed: prevState.speed - 10,
+          };
+        } else {
+          return {
+            fruitPosition: constants.FRUIT_POSITION(),
+            speed: prevState.speed - 1,
+          };
+        }
       });
+
+      clearInterval(this.state.intervalId);
+
+      const intervalId = setInterval(this.moveSnake, this.state.speed);
+      this.setState({ intervalId: intervalId });
 
       this.snakeGrow();
     }
@@ -176,11 +195,12 @@ class App extends Component {
     this.setState({
       snakePosition: constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
+      speed: constants.SPEED,
       gameOver: true,
     });
 
     clearInterval(this.state.intervalId);
-    alert(`Game Over! Your Score: ${this.state.snakePosition.length}`);
+    alert(`Game Over! Your Score: ${this.state.snakePosition.length * 10}`);
   };
 
   render() {

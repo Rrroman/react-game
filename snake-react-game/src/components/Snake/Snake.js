@@ -1,15 +1,33 @@
 import React from 'react';
 import classes from './Snake.module.css';
+import constants from '../../constants/constants';
 
 const Snake = (props) => {
   return (
     <div>
-      {props.snakePosition.map((snakePiece, index) => {
+      {props.snakePosition.map((snakePiece, index, arr) => {
         const StartPositionStyles = {
           left: `${snakePiece[0]}%`,
           top: `${snakePiece[1]}%`,
+          transform: `${
+            props.direction === constants.LEFT
+              ? 'rotate(90deg)'
+              : props.direction === constants.TOP
+              ? 'rotate(180deg)'
+              : props.direction === constants.RIGHT
+              ? 'rotate(270deg)'
+              : 'rotate(0deg)'
+          }`,
         };
-        return (
+        return index === arr.length - 1 ? (
+          <div
+            key={index}
+            className={`${classes.snake__piece} ${classes.snake__head} ${
+              props.gameOver ? classes.snake__head_dead : ''
+            }`}
+            style={StartPositionStyles}
+          ></div>
+        ) : (
           <div
             key={index}
             className={classes.snake__piece}

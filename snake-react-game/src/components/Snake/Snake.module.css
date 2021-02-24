@@ -2,8 +2,19 @@
   position: absolute;
   width: 4%;
   height: 4%;
-  background-color: forestgreen;
-  border: 1px solid black;
+  background: radial-gradient(circle 50px, red, yellow 10%, #1e90ff 50%, beige);
+  /* border: 1px solid black; */
   border-radius: 50%;
   z-index: 20;
+}
+
+.snake__head {
+  background-color: transparent;
+  background-image: url('../../assets/tongue-out.svg');
+  background-size: 110%;
+  background-position: center;
+}
+
+.snake__head_dead {
+  background-image: url('../../assets/dead.svg');
 }

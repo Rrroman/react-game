@@ -25,6 +25,13 @@ class App extends Component {
     this.checkEatFruit();
   }
 
+  // componentWillUnmount() {
+  //   // fix Warning: Can't perform a React state update on an unmounted component
+  //   this.setState = (state, callback) => {
+  //     return;
+  //   };
+  // }
+
   keydownHandler(event) {
     switch (event.keyCode) {
       case 37:
@@ -207,7 +214,11 @@ class App extends Component {
     return (
       <div className={classes.app}>
         <div className={classes.app__field}>
-          <Snake snakePosition={this.state.snakePosition} />
+          <Snake
+            snakePosition={this.state.snakePosition}
+            direction={this.state.direction}
+            gameOver={this.state.gameOver}
+          />
           <Fruit fruitPosition={this.state.fruitPosition} />
         </div>
       </div>

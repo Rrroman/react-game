@@ -4,6 +4,7 @@ import Snake from '../components/Snake/Snake';
 import Fruit from '../components/Fruit/Fruit';
 import constants from '../constants/constants';
 import Controls from '../components/Controls/Controls';
+import biteSound from '../assets/bite.mp3';
 
 class App extends Component {
   state = {
@@ -223,6 +224,9 @@ class App extends Component {
       this.setState({ intervalId: intervalId });
 
       this.snakeGrow();
+
+      const audio = new Audio(biteSound);
+      audio.play();
     }
   };
 

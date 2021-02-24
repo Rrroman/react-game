@@ -11,6 +11,7 @@ class App extends Component {
     speed: constants.SPEED,
     fruitPosition: constants.FRUIT_POSITION(),
     gameOver: false,
+    gamePause: false,
   };
 
   componentDidMount() {
@@ -25,46 +26,74 @@ class App extends Component {
     this.checkEatFruit();
   }
 
-  // componentWillUnmount() {
-  //   // fix Warning: Can't perform a React state update on an unmounted component
-  //   this.setState = (state, callback) => {
-  //     return;
-  //   };
-  // }
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
 
   keydownHandler(event) {
     switch (event.keyCode) {
       case 37:
       case 65:
-        if (this.state.direction !== constants.RIGHT) {
+        if (this.state.direction !== constants.RIGHT && !this.state.gamePause) {
           this.setDirection(constants.LEFT);
+          this.moveSnake();
         }
-        this.moveSnake();
         break;
       case 38:
       case 87:
-        if (this.state.direction !== constants.BOTTOM) {
+        if (
+          this.state.direction !== constants.BOTTOM &&
+          !this.state.gamePause
+        ) {
           this.setState({ direction: constants.TOP });
+          this.moveSnake();
         }
-        this.moveSnake();
         break;
       case 39:
       case 68:
-        if (this.state.direction !== constants.LEFT) {
+        if (this.state.direction !== constants.LEFT && !this.state.gamePause) {
           this.setState({ direction: constants.RIGHT });
+          this.moveSnake();
         }
-        this.moveSnake();
         break;
       case 40:
       case 83:
-        if (this.state.direction !== constants.TOP) {
+        if (this.state.direction !== constants.TOP && !this.state.gamePause) {
           this.setState({ direction: constants.BOTTOM });
+          this.moveSnake();
         }
-        this.moveSnake();
+        break;
+      case 32:
+      case 27:
+        this.setState((prevState) => {
+          return {
+            gamePause: !prevState.gamePause,
+          };
+        });
+        this.gamePauseToggle();
         break;
       default:
     }
   }
+
+  gamePauseToggle = () => {
+    if (this.state.gamePause) {
+      clearInterval(this.state.intervalId);
+      this.setState({
+        gamePause: true,
+      });
+    } else {
+      const newIntervalId = setInterval(this.moveSnake, this.state.speed);
+
+      this.setState({
+        intervalId: newIntervalId,
+        gamePause: false,
+      });
+    }
+  };
 
   setDirection(direction) {
     this.setState({ direction: direction });
@@ -162,9 +191,6 @@ class App extends Component {
       headCoordinates[0] === fruitCoordinates[0] &&
       headCoordinates[1] === fruitCoordinates[1]
     ) {
-      // this.setState({
-      //   fruitPosition: constants.FRUIT_POSITION(),
-      // });
       this.setState((prevState) => {
         if (prevState.speed > 50) {
           return {

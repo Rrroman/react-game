@@ -1,5 +1,6 @@
 const constants = {
   SIZE: 4,
+  FIELD_SIZE: '600px',
   SPEED: 150,
   SPEED_FAST: 50,
   SPEED_STEP: 10,

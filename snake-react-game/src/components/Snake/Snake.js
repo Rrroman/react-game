@@ -9,6 +9,8 @@ const Snake = (props) => {
         const StartPositionStyles = {
           left: `${snakePiece[0]}%`,
           top: `${snakePiece[1]}%`,
+          width: `${props.size}%`,
+          height: `${props.size}%`,
           transform: `${
             props.direction === constants.LEFT
               ? 'rotate(90deg)'

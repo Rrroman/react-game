@@ -1,7 +1,5 @@
 .snake__piece {
   position: absolute;
-  width: 4%;
-  height: 4%;
   background: radial-gradient(circle 50px, red, yellow 10%, #1e90ff 50%, beige);
   border-radius: 50%;
   box-shadow: 1px 1px 5px 1px rgba(46, 46, 85, 0.2);
@@ -9,10 +7,10 @@
 }
 
 .snake__head {
-  background-color: transparent;
   background-image: url('../../assets/tongue-out.svg');
+  background-position: center center;
   background-size: 110%;
-  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .snake__head_dead {

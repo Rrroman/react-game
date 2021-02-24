@@ -1,7 +1,5 @@
 .fruit {
   position: absolute;
-  width: 4%;
-  height: 4%;
   background-image: url('../../assets/apple.svg');
   background-position: center;
   background-repeat: no-repeat;

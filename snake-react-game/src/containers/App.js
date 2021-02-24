@@ -264,17 +264,26 @@ class App extends Component {
     }
   };
 
+  fieldStyles = {
+    maxWidth: `${constants.FIELD_SIZE}`,
+    height: `${constants.FIELD_SIZE}`,
+  };
+
   render() {
     return (
       <div className={classes.app}>
         <Controls clicked={this.startGameHandler.bind(this)} />
-        <div className={classes.app__field}>
+        <div className={classes.app__field} style={this.fieldStyles}>
           <Snake
             snakePosition={this.state.snakePosition}
             direction={this.state.direction}
             gameOver={this.state.gameOver}
+            size={constants.SIZE}
           />
-          <Fruit fruitPosition={this.state.fruitPosition} />
+          <Fruit
+            fruitPosition={this.state.fruitPosition}
+            size={constants.SIZE}
+          />
         </div>
       </div>
     );

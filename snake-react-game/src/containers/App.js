@@ -12,7 +12,7 @@ class App extends Component {
     direction: constants.RIGHT,
     speed: constants.SPEED,
     fruitPosition: constants.FRUIT_POSITION(),
-    gameOver: true,
+    gameOver: false,
     gamePause: true,
     score: 0,
   };
@@ -92,22 +92,6 @@ class App extends Component {
       default:
     }
   }
-
-  gamePauseToggle = () => {
-    if (!this.state.gameOver && this.state.gamePause) {
-      clearInterval(this.state.intervalId);
-      this.setState({
-        gamePause: true,
-      });
-    } else if (!this.state.gameOver) {
-      const newIntervalId = setInterval(this.moveSnake, this.state.speed);
-
-      this.setState({
-        intervalId: newIntervalId,
-        gamePause: false,
-      });
-    }
-  };
 
   setDirection(direction) {
     this.setState({ direction: direction });
@@ -243,6 +227,22 @@ class App extends Component {
     });
   };
 
+  gamePauseToggle = () => {
+    if (this.state.gamePause) {
+      clearInterval(this.state.intervalId);
+      this.setState({
+        gamePause: true,
+      });
+    } else if (!this.state.gameOver) {
+      const newIntervalId = setInterval(this.moveSnake, this.state.speed);
+
+      this.setState({
+        intervalId: newIntervalId,
+        gamePause: false,
+      });
+    }
+  };
+
   gameOver = () => {
     this.setState({
       snakePosition: constants.STARTING_SNAKE_POSITION,
@@ -256,7 +256,7 @@ class App extends Component {
   };
 
   startGameHandler = () => {
-    if (this.state.gameOver) {
+    if (this.state.gameOver || this.state.gamePause) {
       const intervalId = setInterval(this.moveSnake, this.state.speed);
       this.setState({
         intervalId: intervalId,

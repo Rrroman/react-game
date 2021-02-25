@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Rrroman/react-game/static/css/main.6ce8b449.chunk.css",
+    "main.js": "/Rrroman/react-game/static/js/main.dabeb08d.chunk.js",
+    "main.js.map": "/Rrroman/react-game/static/js/main.dabeb08d.chunk.js.map",
+    "runtime-main.js": "/Rrroman/react-game/static/js/runtime-main.853e5b4c.js",
+    "runtime-main.js.map": "/Rrroman/react-game/static/js/runtime-main.853e5b4c.js.map",
+    "static/js/2.964c384c.chunk.js": "/Rrroman/react-game/static/js/2.964c384c.chunk.js",
+    "static/js/2.964c384c.chunk.js.map": "/Rrroman/react-game/static/js/2.964c384c.chunk.js.map",
+    "static/js/3.1fa01b73.chunk.js": "/Rrroman/react-game/static/js/3.1fa01b73.chunk.js",
+    "static/js/3.1fa01b73.chunk.js.map": "/Rrroman/react-game/static/js/3.1fa01b73.chunk.js.map",
+    "index.html": "/Rrroman/react-game/index.html",
+    "static/css/main.6ce8b449.chunk.css.map": "/Rrroman/react-game/static/css/main.6ce8b449.chunk.css.map",
+    "static/js/2.964c384c.chunk.js.LICENSE.txt": "/Rrroman/react-game/static/js/2.964c384c.chunk.js.LICENSE.txt",
+    "static/media/Fruit.module.css": "/Rrroman/react-game/static/media/apple-compressed.33c1eec7.svg",
+    "static/media/bite.1e6ccb0d.mp3": "/Rrroman/react-game/static/media/bite.1e6ccb0d.mp3",
+    "static/media/Snake.module.css": "/Rrroman/react-game/static/media/tongue-out-compressed.4a61b9ae.svg",
+    "static/media/App.module.css": "/Rrroman/react-game/static/media/organic-compressed.cac3033f.svg",
+    "static/media/rs_school_js.d7e49236.svg": "/Rrroman/react-game/static/media/rs_school_js.d7e49236.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.853e5b4c.js",
+    "static/js/2.964c384c.chunk.js",
+    "static/css/main.6ce8b449.chunk.css",
+    "static/js/main.dabeb08d.chunk.js"
+  ]
+}

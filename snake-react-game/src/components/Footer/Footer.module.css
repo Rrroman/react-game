@@ -1,13 +1,13 @@
 .footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 
+  max-width: 600px;
   padding: 0 10px;
+  margin: 0 auto;
 
   font-weight: bold;
-  width: 100%;
-
   color: #000000;
 }
 

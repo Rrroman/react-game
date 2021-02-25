@@ -1,5 +1,5 @@
 .app {
-  padding: 10px 60px 0;
+  padding: 100px 60px 0;
 }
 
 .app__field {
@@ -27,12 +27,22 @@
   background-repeat: no-repeat;
 }
 
+@media screen and (max-width: 1100px) {
+  .app {
+    padding-top: 25px;
+  }
+}
+
 @media screen and (max-height: 700px), screen and (max-width: 700px) {
   .app__field {
     height: 400px;
   }
 }
 @media screen and (max-height: 520px), screen and (max-width: 700px) {
+  .app {
+    padding-top: 10px;
+  }
+
   .app__field {
     height: 350px;
   }

@@ -12,9 +12,17 @@ class App extends Component {
     direction: constants.RIGHT,
     speed: constants.SPEED,
     fruitPosition: constants.FRUIT_POSITION(),
-    gameOver: false,
-    gamePause: true,
+    isGameOver: false,
+    isGamePause: true,
     score: 0,
+    isVolume: true,
+    isMusic: false,
+  };
+
+  audio = new Audio(biteSound);
+  fieldStyles = {
+    maxWidth: `${constants.FIELD_SIZE}`,
+    height: `${constants.FIELD_SIZE}`,
   };
 
   componentDidMount() {
@@ -40,8 +48,8 @@ class App extends Component {
       case 65:
         if (
           this.state.direction !== constants.RIGHT &&
-          !this.state.gamePause &&
-          !this.state.gameOver
+          !this.state.isGamePause &&
+          !this.state.isGameOver
         ) {
           this.setDirection(constants.LEFT);
           this.moveSnake();
@@ -51,8 +59,8 @@ class App extends Component {
       case 87:
         if (
           this.state.direction !== constants.BOTTOM &&
-          !this.state.gamePause &&
-          !this.state.gameOver
+          !this.state.isGamePause &&
+          !this.state.isGameOver
         ) {
           this.setState({ direction: constants.TOP });
           this.moveSnake();
@@ -62,8 +70,8 @@ class App extends Component {
       case 68:
         if (
           this.state.direction !== constants.LEFT &&
-          !this.state.gamePause &&
-          !this.state.gameOver
+          !this.state.isGamePause &&
+          !this.state.isGameOver
         ) {
           this.setState({ direction: constants.RIGHT });
           this.moveSnake();
@@ -73,8 +81,8 @@ class App extends Component {
       case 83:
         if (
           this.state.direction !== constants.TOP &&
-          !this.state.gamePause &&
-          !this.state.gameOver
+          !this.state.isGamePause &&
+          !this.state.isGameOver
         ) {
           this.setState({ direction: constants.BOTTOM });
           this.moveSnake();
@@ -83,10 +91,10 @@ class App extends Component {
       case 27:
         this.setState((prevState) => {
           return {
-            gamePause: !prevState.gamePause,
+            isGamePause: !prevState.isGamePause,
           };
         });
-        this.gamePauseToggle();
+        this.isGamePauseToggle();
         break;
       default:
     }
@@ -97,13 +105,13 @@ class App extends Component {
   }
 
   moveSnake = () => {
-    if (this.state.gameOver) {
+    if (this.state.isGameOver) {
       clearInterval(this.state.intervalId);
       const newIntervalId = setInterval(this.moveSnake, this.state.speed);
 
       this.setState({
         intervalId: newIntervalId,
-        gameOver: false,
+        isGameOver: false,
         speed: constants.SPEED,
       });
     }
@@ -158,7 +166,7 @@ class App extends Component {
       headCoordinates[1] < 0 ||
       headCoordinates[1] >= constants.MAX_POSITION
     ) {
-      this.gameOver();
+      this.isGameOver();
     }
   };
 
@@ -173,7 +181,7 @@ class App extends Component {
         headCoordinates[0] === snakePieces[0] &&
         headCoordinates[1] === snakePieces[1]
       ) {
-        this.gameOver();
+        this.isGameOver();
       }
     });
   };
@@ -211,8 +219,10 @@ class App extends Component {
 
       this.snakeGrow();
 
-      const audio = new Audio(biteSound);
-      audio.play();
+      if (this.state.isVolume) {
+        this.audio.currentTime = 0;
+        this.audio.play();
+      }
     }
   };
 
@@ -226,48 +236,59 @@ class App extends Component {
     });
   };
 
-  gamePauseToggle = () => {
-    if (this.state.gamePause) {
+  isGamePauseToggle = () => {
+    if (this.state.isGamePause) {
       clearInterval(this.state.intervalId);
       this.setState({
-        gamePause: true,
+        isGamePause: true,
       });
-    } else if (!this.state.gamePause) {
+    } else if (!this.state.isGamePause) {
       const newIntervalId = setInterval(this.moveSnake, this.state.speed);
 
       this.setState({
         intervalId: newIntervalId,
-        gamePause: false,
+        isGamePause: false,
       });
     }
   };
 
-  gameOver = () => {
+  isGameOver = () => {
     this.setState({
       snakePosition: constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
       speed: constants.SPEED,
-      gameOver: true,
+      isGameOver: true,
     });
 
     clearInterval(this.state.intervalId);
   };
 
   startGameHandler = () => {
-    if (this.state.gameOver || this.state.gamePause) {
+    if (this.state.isGameOver || this.state.isGamePause) {
       const intervalId = setInterval(this.moveSnake, this.state.speed);
       this.setState({
         intervalId: intervalId,
-        gameOver: false,
-        gamePause: false,
+        isGameOver: false,
+        isGamePause: false,
         score: 0,
       });
     }
   };
 
-  fieldStyles = {
-    maxWidth: `${constants.FIELD_SIZE}`,
-    height: `${constants.FIELD_SIZE}`,
+  volumeToggleHandler = () => {
+    this.setState((prevState) => {
+      return {
+        isVolume: !prevState.isVolume,
+      };
+    });
+  };
+
+  musicToggleHandler = () => {
+    this.setState((prevState) => {
+      return {
+        isMusic: !prevState.isMusic,
+      };
+    });
   };
 
   render() {
@@ -276,18 +297,39 @@ class App extends Component {
         <Controls
           clicked={this.startGameHandler.bind(this)}
           score={this.state.score}
+          isVolume={this.state.isVolume}
+          isMusic={this.state.isMusic}
+          volumeToggle={this.volumeToggleHandler}
+          musicToggle={this.musicToggleHandler}
         />
         <div className={classes.app__field} style={this.fieldStyles}>
           <Snake
             snakePosition={this.state.snakePosition}
             direction={this.state.direction}
-            gameOver={this.state.gameOver}
+            isGameOver={this.state.isGameOver}
             size={constants.SIZE}
           />
           <Fruit
             fruitPosition={this.state.fruitPosition}
             size={constants.SIZE}
           />
+        </div>
+        <div
+          className={classes.music}
+          style={
+            this.state.isMusic ? { display: 'block' } : { display: 'none' }
+          }
+        >
+          <iframe
+            title="music"
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/DIi-pBpXIbE"
+            frameBorder="0"
+            allow="accelerometer; autoplay;"
+            allowFullScreen
+            className={classes.music__player}
+          ></iframe>
         </div>
       </div>
     );

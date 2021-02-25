@@ -1,6 +1,10 @@
+.app {
+  padding: 10px 60px;
+}
+
 .app__field {
   position: relative;
-  margin: 50px auto;
+  margin: 10px auto 20px;
   border: 2px solid #1166aa;
   border-radius: 14px;
   background-color: rgb(254, 255, 240);
@@ -10,13 +14,23 @@
 .app__field::before {
   content: ' ';
   position: absolute;
-  left: -68px;
+  left: -60px;
   top: -54px;
 
   width: 100px;
   height: 100px;
 
-  background-image: url('../assets/organic.svg');
+  background-image: url('../assets/organic-compressed.svg');
   background-size: 100px 100px;
   background-repeat: no-repeat;
+}
+
+.music {
+  max-width: 500px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+.music__player {
+  border-radius: 10px;
 }

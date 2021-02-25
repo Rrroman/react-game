@@ -2,17 +2,16 @@
   position: absolute;
   background: radial-gradient(circle 50px, red, yellow 10%, #1e90ff 50%, beige);
   border-radius: 50%;
-  box-shadow: 1px 1px 5px 1px rgba(46, 46, 85, 0.2);
   z-index: 20;
 }
 
 .snake__head {
-  background-image: url('../../assets/tongue-out.svg');
+  background-image: url('../../assets/tongue-out-compressed.svg');
   background-position: center center;
   background-size: 110%;
   background-repeat: no-repeat;
 }
 
 .snake__head_dead {
-  background-image: url('../../assets/dead.svg');
+  background-image: url('../../assets/dead-compressed.svg');
 }

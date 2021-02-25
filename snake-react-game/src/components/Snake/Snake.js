@@ -25,7 +25,7 @@ const Snake = (props) => {
           <div
             key={index}
             className={`${classes.snake__piece} ${classes.snake__head} ${
-              props.gameOver ? classes.snake__head_dead : ''
+              props.isGameOver ? classes.snake__head_dead : ''
             }`}
             style={StartPositionStyles}
           ></div>

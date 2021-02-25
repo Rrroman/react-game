@@ -12,7 +12,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "1.1.0"
   },
-  "homepage": "https://github.com/Rrroman/react-game/",
+  "homepage": "https://rrroman.github.io/react-game/snake-react-game/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

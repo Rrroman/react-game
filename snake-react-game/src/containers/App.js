@@ -80,7 +80,6 @@ class App extends Component {
           this.moveSnake();
         }
         break;
-      case 32:
       case 27:
         this.setState((prevState) => {
           return {
@@ -233,7 +232,7 @@ class App extends Component {
       this.setState({
         gamePause: true,
       });
-    } else if (!this.state.gameOver) {
+    } else if (!this.state.gamePause) {
       const newIntervalId = setInterval(this.moveSnake, this.state.speed);
 
       this.setState({
@@ -249,7 +248,6 @@ class App extends Component {
       direction: constants.RIGHT,
       speed: constants.SPEED,
       gameOver: true,
-      gamePause: true,
     });
 
     clearInterval(this.state.intervalId);

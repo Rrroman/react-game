@@ -5,6 +5,7 @@ import Fruit from '../components/Fruit/Fruit';
 import constants from '../constants/constants';
 import Controls from '../components/Controls/Controls';
 import biteSound from '../assets/bite.mp3';
+import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 
 class App extends Component {
   state = {
@@ -314,23 +315,7 @@ class App extends Component {
             size={constants.SIZE}
           />
         </div>
-        <div
-          className={classes.music}
-          style={
-            this.state.isMusic ? { display: 'block' } : { display: 'none' }
-          }
-        >
-          <iframe
-            title="music"
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/DIi-pBpXIbE"
-            frameBorder="0"
-            allow="accelerometer; autoplay;"
-            allowFullScreen
-            className={classes.music__player}
-          ></iframe>
-        </div>
+        <MusicPlayer isMusic={this.state.isMusic} />
       </div>
     );
   }

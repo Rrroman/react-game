@@ -25,12 +25,3 @@
   background-repeat: no-repeat;
 }
 
-.music {
-  max-width: 500px;
-  height: 220px;
-  margin: 0 auto;
-}
-
-.music__player {
-  border-radius: 10px;
-}

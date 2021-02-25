@@ -6,6 +6,7 @@ import constants from '../constants/constants';
 import Controls from '../components/Controls/Controls';
 import biteSound from '../assets/bite.mp3';
 import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
+import Footer from '../components/Footer/Footer';
 
 class App extends Component {
   state = {
@@ -316,6 +317,7 @@ class App extends Component {
           />
         </div>
         <MusicPlayer isMusic={this.state.isMusic} />
+        <Footer />
       </div>
     );
   }

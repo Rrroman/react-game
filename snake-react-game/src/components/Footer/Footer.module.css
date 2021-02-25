@@ -1,0 +1,26 @@
+.footer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+
+  margin-top: 10px;
+  padding: 10px;
+
+  width: 100%;
+
+  color: white;
+  background-color: #3498db;
+}
+
+.footer__logo {
+  margin: 0 10px;
+}
+
+.footer__link {
+  color: inherit;
+  text-decoration: inherit;
+  margin: 0 10px;
+}

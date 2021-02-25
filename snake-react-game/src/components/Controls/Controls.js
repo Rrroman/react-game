@@ -4,6 +4,8 @@ import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
+import SettingsIcon from '@material-ui/icons/Settings';
+import Popup from '../Popup/Popup';
 
 const Controls = (props) => {
   const volumeIcon = props.isVolume ? (
@@ -32,6 +34,15 @@ const Controls = (props) => {
       </button>
       <button onClick={props.musicToggle} className={classes.controls__volume}>
         {musicIcon}
+      </button>
+      <button
+        onClick={props.settingsToggle}
+        className={classes.controls__volume}
+      >
+        <SettingsIcon style={{ color: 'white' }}></SettingsIcon>
+        <Popup>
+          <div>Popup Title</div>
+        </Popup>
       </button>
     </div>
   );

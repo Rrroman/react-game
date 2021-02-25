@@ -22,10 +22,6 @@ class App extends Component {
   };
 
   audio = new Audio(biteSound);
-  fieldStyles = {
-    maxWidth: `${constants.FIELD_SIZE}`,
-    height: `${constants.FIELD_SIZE}`,
-  };
 
   componentDidMount() {
     window.addEventListener('keydown', this.keydownHandler.bind(this));
@@ -304,7 +300,7 @@ class App extends Component {
           volumeToggle={this.volumeToggleHandler}
           musicToggle={this.musicToggleHandler}
         />
-        <div className={classes.app__field} style={this.fieldStyles}>
+        <div className={classes.app__field}>
           <Snake
             snakePosition={this.state.snakePosition}
             direction={this.state.direction}

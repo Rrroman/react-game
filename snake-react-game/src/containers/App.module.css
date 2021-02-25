@@ -1,10 +1,12 @@
 .app {
-  padding: 10px 60px;
+  padding: 10px 60px 0;
 }
 
 .app__field {
   position: relative;
-  margin: 10px auto 20px;
+  max-width: 600px;
+  height: 600px;
+  margin: 10px auto 0;
   border: 2px solid #1166aa;
   border-radius: 14px;
   background-color: rgb(254, 255, 240);
@@ -25,3 +27,13 @@
   background-repeat: no-repeat;
 }
 
+@media screen and (max-height: 700px), screen and (max-width: 700px) {
+  .app__field {
+    height: 400px;
+  }
+}
+@media screen and (max-height: 520px), screen and (max-width: 700px) {
+  .app__field {
+    height: 350px;
+  }
+}

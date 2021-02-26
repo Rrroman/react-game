@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Fullscreen from 'react-full-screen';
 import classes from './App.module.css';
 import Snake from '../components/Snake/Snake';
 import Fruit from '../components/Fruit/Fruit';
@@ -21,6 +22,11 @@ class App extends Component {
     bestScore: 0,
     isVolume: true,
     isMusic: false,
+    isFull: false,
+  };
+
+  goFull = () => {
+    this.setState({ isFull: true });
   };
 
   audio = new Audio(biteSound);
@@ -94,7 +100,7 @@ class App extends Component {
           this.moveSnake();
         }
         break;
-      case 27:
+      case 32:
         this.setState((prevState) => {
           return {
             isGamePause: !prevState.isGamePause,
@@ -278,7 +284,7 @@ class App extends Component {
     clearInterval(this.state.intervalId);
   };
 
-  startGameHandler = () => {
+  startGameHandler = (event) => {
     if (this.state.isGameOver || this.state.isGamePause) {
       const intervalId = setInterval(this.moveSnake, this.state.speed);
       this.setState({
@@ -288,51 +294,67 @@ class App extends Component {
         score: 0,
       });
     }
-    // alert(this.state.bestScore);
+
+    event.target.blur();
   };
 
-  volumeToggleHandler = () => {
+  volumeToggleHandler = (event) => {
     this.setState((prevState) => {
       return {
         isVolume: !prevState.isVolume,
       };
     });
+
+    event.target.blur();
   };
 
-  musicToggleHandler = () => {
+  musicToggleHandler = (event) => {
     this.setState((prevState) => {
       return {
         isMusic: !prevState.isMusic,
       };
     });
+
+    event.target.blur();
   };
 
   render() {
     return (
       <div className={classes.app}>
-        <BestScoreContext.Provider value={{ bestScore: this.state.bestScore }}>
-          <Controls
-            clicked={this.startGameHandler.bind(this)}
-            score={this.state.score}
-            isVolume={this.state.isVolume}
-            isMusic={this.state.isMusic}
-            volumeToggle={this.volumeToggleHandler}
-            musicToggle={this.musicToggleHandler}
-          />
-        </BestScoreContext.Provider>
+        <Fullscreen
+          enabled={this.state.isFull}
+          onChange={(isFull) => this.setState({ isFull })}
+        >
+          <BestScoreContext.Provider
+            value={{ bestScore: this.state.bestScore }}
+          >
+            <Controls
+              clicked={this.startGameHandler.bind(this)}
+              score={this.state.score}
+              isVolume={this.state.isVolume}
+              isMusic={this.state.isMusic}
+              volumeToggle={this.volumeToggleHandler}
+              musicToggle={this.musicToggleHandler}
+              goFull={this.goFull.bind(this)}
+              isFull={this.state.isFull}
+            />
+          </BestScoreContext.Provider>
 
-        <div className={classes.app__field}>
-          <Snake
-            snakePosition={this.state.snakePosition}
-            direction={this.state.direction}
-            isGameOver={this.state.isGameOver}
-            size={constants.SIZE}
-          />
-          <Fruit
-            fruitPosition={this.state.fruitPosition}
-            size={constants.SIZE}
-          />
-        </div>
+          <div>
+            <div className={classes.app__field}>
+              <Snake
+                snakePosition={this.state.snakePosition}
+                direction={this.state.direction}
+                isGameOver={this.state.isGameOver}
+                size={constants.SIZE}
+              />
+              <Fruit
+                fruitPosition={this.state.fruitPosition}
+                size={constants.SIZE}
+              />
+            </div>
+          </div>
+        </Fullscreen>
 
         <MusicPlayer isMusic={this.state.isMusic} />
 

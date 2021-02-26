@@ -29,10 +29,18 @@ const Controls = (props) => {
       <Button variant="contained" color="primary" onClick={props.volumeToggle}>
         {volumeIcon}
       </Button>
-      <Button variant="contained" color="primary" onClick={props.musicToggle}>
-        {musicIcon}
-      </Button>
-      <Popup />
+      {props.isFull ? null : (
+        <Button variant="contained" color="primary" onClick={props.musicToggle}>
+          {musicIcon}
+        </Button>
+      )}
+
+      {props.isFull ? null : (
+        <Button variant="contained" color="primary" onClick={props.goFull}>
+          Go Fullscreen
+        </Button>
+      )}
+      {props.isFull ? null : <Popup />}
     </div>
   );
 };

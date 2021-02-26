@@ -5,14 +5,6 @@ import Button from '@material-ui/core/Button';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ScrollableTabsButtonAuto from '../Tabs/Tabs';
 
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
-
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
-
 function getModalStyle() {
   const top = 50;
   const left = 50;

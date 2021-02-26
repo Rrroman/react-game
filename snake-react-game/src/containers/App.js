@@ -25,12 +25,14 @@ class App extends Component {
     isFull: false,
   };
 
-  goFull = () => {
+  goFull = (event) => {
     this.setState((prevState) => {
       return {
         isFull: !prevState.isFull,
       };
     });
+
+    event.target.blur();
   };
 
   audio = new Audio(biteSound);
@@ -345,7 +347,11 @@ class App extends Component {
           </BestScoreContext.Provider>
 
           <div>
-            <div className={classes.app__field}>
+            <div
+              className={`${classes.app__field} ${
+                this.state.isFull ? classes.app__fullScreen : null
+              }`}
+            >
               <Snake
                 snakePosition={this.state.snakePosition}
                 direction={this.state.direction}

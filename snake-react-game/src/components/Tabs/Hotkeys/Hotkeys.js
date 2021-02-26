@@ -17,7 +17,7 @@ const Hotkeys = () => {
         <span className={classes.key}>DOWN:</span> down arrow \ S
       </li>
       <li>
-        <span className={classes.key}>PAUSE:</span> escape
+        <span className={classes.key}>PAUSE:</span> space
       </li>
       <li>
         <span className={classes.key}>TURBO:</span> hold move button

@@ -26,7 +26,11 @@ class App extends Component {
   };
 
   goFull = () => {
-    this.setState({ isFull: true });
+    this.setState((prevState) => {
+      return {
+        isFull: !prevState.isFull,
+      };
+    });
   };
 
   audio = new Audio(biteSound);

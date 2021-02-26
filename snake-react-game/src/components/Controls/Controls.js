@@ -6,6 +6,7 @@ import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import Popup from '../Popup/Popup';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 
 const Controls = (props) => {
   const volumeIcon = props.isVolume ? (
@@ -35,11 +36,10 @@ const Controls = (props) => {
         </Button>
       )}
 
-      {props.isFull ? null : (
-        <Button variant="contained" color="primary" onClick={props.goFull}>
-          Go Fullscreen
-        </Button>
-      )}
+      <Button variant="contained" color="primary" onClick={props.goFull}>
+        <FullscreenIcon />
+      </Button>
+
       {props.isFull ? null : <Popup />}
     </div>
   );

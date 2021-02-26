@@ -17,6 +17,7 @@ class App extends Component {
     isGameOver: false,
     isGamePause: true,
     score: 0,
+    bestScore: 0,
     isVolume: true,
     isMusic: false,
   };
@@ -25,6 +26,12 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener('keydown', this.keydownHandler.bind(this));
+
+    const isBestScore = typeof localStorage.getItem('bestScore') === 'number';
+    const updateScore = isBestScore ? localStorage.getItem('bestScore') : 0;
+    this.setState({
+      bestScore: updateScore,
+    });
   }
 
   componentDidUpdate() {
@@ -258,6 +265,15 @@ class App extends Component {
       isGameOver: true,
     });
 
+    if (this.state.score > this.state.bestScore) {
+      localStorage.setItem('bestScore', this.state.score);
+      this.setState((prevState) => {
+        return {
+          bestScore: prevState.score,
+        };
+      });
+    }
+
     clearInterval(this.state.intervalId);
   };
 
@@ -271,6 +287,7 @@ class App extends Component {
         score: 0,
       });
     }
+    alert(this.state.bestScore);
   };
 
   volumeToggleHandler = () => {

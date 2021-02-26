@@ -1,0 +1,17 @@
+.list {
+  padding: 0;
+}
+
+.list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.list li:nth-child(2n) {
+  background-color: rgb(215, 236, 255);
+}
+
+.key {
+  font-weight: bold;
+}

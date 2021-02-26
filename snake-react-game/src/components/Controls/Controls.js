@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './Controls.module.css';
+import Button from '@material-ui/core/Button';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-import SettingsIcon from '@material-ui/icons/Settings';
 import Popup from '../Popup/Popup';
 
 const Controls = (props) => {
@@ -23,27 +23,16 @@ const Controls = (props) => {
   return (
     <div className={classes.controls__wrapper}>
       <div className={classes.controls__score}>Score: {props.score}</div>
-      <button
-        onClick={props.clicked}
-        className={classes['controls__start-btn']}
-      >
+      <Button variant="contained" color="primary" onClick={props.clicked}>
         Start Game
-      </button>
-      <button onClick={props.volumeToggle} className={classes.controls__volume}>
+      </Button>
+      <Button variant="contained" color="primary" onClick={props.volumeToggle}>
         {volumeIcon}
-      </button>
-      <button onClick={props.musicToggle} className={classes.controls__volume}>
+      </Button>
+      <Button variant="contained" color="primary" onClick={props.musicToggle}>
         {musicIcon}
-      </button>
-      <button
-        onClick={props.settingsToggle}
-        className={classes.controls__volume}
-      >
-        <SettingsIcon style={{ color: 'white' }}></SettingsIcon>
-        <Popup>
-          <div>Popup Title</div>
-        </Popup>
-      </button>
+      </Button>
+      <Popup />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Hotkeys from './Hotkeys/Hotkeys';
+import BestScoreContext from '../../context/BestScore-context';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,9 +49,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ScrollableTabsButtonAuto() {
+export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const bestScoreContext = useContext(BestScoreContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -69,18 +71,18 @@ export default function ScrollableTabsButtonAuto() {
           aria-label="scrollable auto tabs example"
         >
           <Tab label="Hot Keys" {...a11yProps(0)} />
-          <Tab label="Settings" {...a11yProps(1)} />
-          <Tab label="Best Score" {...a11yProps(2)} />
+          <Tab label="Best Score" {...a11yProps(1)} />
+          <Tab label="Settings" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <Hotkeys />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <p>Settings...</p>
+        <p>Best Score: {bestScoreContext.bestScore}</p>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <p>Best Score: over 9000</p>
+        <p>Settings...</p>
       </TabPanel>
     </div>
   );

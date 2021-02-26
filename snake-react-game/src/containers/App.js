@@ -7,6 +7,7 @@ import Controls from '../components/Controls/Controls';
 import biteSound from '../assets/bite.mp3';
 import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 import Footer from '../components/Footer/Footer';
+import BestScoreContext from '../context/BestScore-context';
 
 class App extends Component {
   state = {
@@ -27,7 +28,7 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.keydownHandler.bind(this));
 
-    const isBestScore = typeof localStorage.getItem('bestScore') === 'number';
+    const isBestScore = localStorage.getItem('bestScore') > 0;
     const updateScore = isBestScore ? localStorage.getItem('bestScore') : 0;
     this.setState({
       bestScore: updateScore,
@@ -287,7 +288,7 @@ class App extends Component {
         score: 0,
       });
     }
-    alert(this.state.bestScore);
+    // alert(this.state.bestScore);
   };
 
   volumeToggleHandler = () => {
@@ -309,14 +310,17 @@ class App extends Component {
   render() {
     return (
       <div className={classes.app}>
-        <Controls
-          clicked={this.startGameHandler.bind(this)}
-          score={this.state.score}
-          isVolume={this.state.isVolume}
-          isMusic={this.state.isMusic}
-          volumeToggle={this.volumeToggleHandler}
-          musicToggle={this.musicToggleHandler}
-        />
+        <BestScoreContext.Provider value={{ bestScore: this.state.bestScore }}>
+          <Controls
+            clicked={this.startGameHandler.bind(this)}
+            score={this.state.score}
+            isVolume={this.state.isVolume}
+            isMusic={this.state.isMusic}
+            volumeToggle={this.volumeToggleHandler}
+            musicToggle={this.musicToggleHandler}
+          />
+        </BestScoreContext.Provider>
+
         <div className={classes.app__field}>
           <Snake
             snakePosition={this.state.snakePosition}
@@ -329,7 +333,9 @@ class App extends Component {
             size={constants.SIZE}
           />
         </div>
+
         <MusicPlayer isMusic={this.state.isMusic} />
+
         <Footer />
       </div>
     );

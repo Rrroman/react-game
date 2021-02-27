@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 export default function ContinuousSlider() {
   const classes = useStyles();
   const audioVolumeContext = useContext(BestScoreContext);
+
   const [value, setValue] = React.useState(
     parseInt(audioVolumeContext.audioVolume),
   );

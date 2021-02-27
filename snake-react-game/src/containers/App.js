@@ -47,7 +47,7 @@ class App extends Component {
     const isSavedVolume = localStorage.getItem('audioVolume');
     const updateVolume = isSavedVolume
       ? localStorage.getItem('audioVolume')
-      : 0;
+      : this.state.audioVolume;
 
     this.setState({
       bestScore: updateScore,

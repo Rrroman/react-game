@@ -32,7 +32,8 @@ export default function SimpleModal(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (event) => {
+    event.target.blur();
     setOpen(true);
   };
 

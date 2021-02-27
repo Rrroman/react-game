@@ -23,6 +23,7 @@ class App extends Component {
     isVolume: true,
     isMusic: false,
     isFull: false,
+    audioVolume: 100,
   };
 
   goFull = (event) => {
@@ -42,8 +43,15 @@ class App extends Component {
 
     const isBestScore = localStorage.getItem('bestScore') > 0;
     const updateScore = isBestScore ? localStorage.getItem('bestScore') : 0;
+
+    const isSavedVolume = localStorage.getItem('audioVolume');
+    const updateVolume = isSavedVolume
+      ? localStorage.getItem('audioVolume')
+      : 0;
+
     this.setState({
       bestScore: updateScore,
+      audioVolume: updateVolume,
     });
   }
 
@@ -239,6 +247,7 @@ class App extends Component {
 
       if (this.state.isVolume) {
         this.audio.currentTime = 0;
+        this.audio.volume = this.state.audioVolume / 100;
         this.audio.play();
       }
     }
@@ -314,6 +323,14 @@ class App extends Component {
     event.target.blur();
   };
 
+  audioVolumeHandler = (newVolume) => {
+    this.setState({
+      audioVolume: newVolume,
+    });
+
+    localStorage.setItem('audioVolume', this.state.audioVolume);
+  };
+
   musicToggleHandler = (event) => {
     this.setState((prevState) => {
       return {
@@ -332,7 +349,11 @@ class App extends Component {
           onChange={(isFull) => this.setState({ isFull })}
         >
           <BestScoreContext.Provider
-            value={{ bestScore: this.state.bestScore }}
+            value={{
+              bestScore: this.state.bestScore,
+              audioVolumeHandler: this.audioVolumeHandler,
+              audioVolume: this.state.audioVolume,
+            }}
           >
             <Controls
               clicked={this.startGameHandler.bind(this)}

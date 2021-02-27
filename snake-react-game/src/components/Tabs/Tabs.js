@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Hotkeys from './Hotkeys/Hotkeys';
 import BestScoreContext from '../../context/BestScore-context';
+import ContinuousSlider from './VolumeSlider/VolumeSlider';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,7 +83,9 @@ export default function ScrollableTabsButtonAuto(props) {
         <p>Best Score: {bestScoreContext.bestScore}</p>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <p>Settings...</p>
+        <div style={{ paddingTop: '20px' }}>
+          <ContinuousSlider />
+        </div>
       </TabPanel>
     </div>
   );

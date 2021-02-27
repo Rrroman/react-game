@@ -26,6 +26,8 @@ class App extends Component {
     audioVolume: 100,
   };
 
+  audio = new Audio(biteSound);
+
   goFull = (event) => {
     this.setState((prevState) => {
       return {
@@ -35,8 +37,6 @@ class App extends Component {
 
     event.target.blur();
   };
-
-  audio = new Audio(biteSound);
 
   componentDidMount() {
     window.addEventListener('keydown', this.keydownHandler.bind(this));

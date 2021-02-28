@@ -25,7 +25,7 @@ const Controls = (props) => {
     <div className={classes.controls__wrapper}>
       <div className={classes.controls__score}>Score: {props.score}</div>
       <Button variant="contained" color="primary" onClick={props.clicked}>
-        Start Game
+        Play
       </Button>
       <Button variant="contained" color="primary" onClick={props.volumeToggle}>
         {volumeIcon}

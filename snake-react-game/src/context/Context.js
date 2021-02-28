@@ -5,6 +5,8 @@ const Context = React.createContext({
   audioVolumeHandler: () => {},
   audioVolume: 0,
   lastScores: 0,
+  hardModeHandler: () => {},
+  isHard: null,
 });
 
 export default Context;

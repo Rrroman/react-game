@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Hotkeys from './Hotkeys/Hotkeys';
 import Context from '../../context/Context';
 import ContinuousSlider from './VolumeSlider/VolumeSlider';
+import Switch from './Switch/Switch';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -97,6 +98,12 @@ export default function ScrollableTabsButtonAuto(props) {
       <TabPanel value={value} index={2}>
         <div style={{ paddingTop: '20px' }}>
           <ContinuousSlider />
+          <p style={{ marginBottom: 0, fontWeight: 'bold' }}>Game Mode:</p>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span>Normal</span>
+            <Switch />
+            <span>Hard</span>
+          </div>
         </div>
       </TabPanel>
     </div>

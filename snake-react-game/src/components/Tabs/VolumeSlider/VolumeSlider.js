@@ -29,8 +29,12 @@ export default function ContinuousSlider() {
 
   return (
     <div className={classes.root}>
-      <Typography id="continuous-slider" gutterBottom>
-        Volume
+      <Typography
+        style={{ marginBottom: 0, fontWeight: 'bold' }}
+        id="continuous-slider"
+        gutterBottom
+      >
+        Volume:
       </Typography>
       <Grid container spacing={2}>
         <Grid item>

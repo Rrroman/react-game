@@ -24,6 +24,7 @@ class App extends Component {
     isVolume: true,
     isMusic: false,
     isFull: false,
+    isHard: false,
     audioVolume: 100,
   };
 
@@ -55,10 +56,18 @@ class App extends Component {
       ? JSON.parse(localStorage.getItem('lastScores'))
       : this.state.lastScores;
 
+    const isHardMode = JSON.parse(localStorage.getItem('isHard'));
+    const updateIsHardMode = isHardMode
+      ? JSON.parse(localStorage.getItem('isHard'))
+      : this.state.isHard;
+
+    this.checkCurrentSpeed(updateIsHardMode);
+
     this.setState({
       bestScore: updateScore,
       audioVolume: updateVolume,
       lastScores: updateLastScores,
+      isHard: updateIsHardMode,
     });
   }
 
@@ -260,6 +269,19 @@ class App extends Component {
     }
   };
 
+  checkCurrentSpeed = (checker) => {
+    let currentSpeed = null;
+    if (checker) {
+      currentSpeed = constants.SPEED / 3;
+    } else {
+      currentSpeed = constants.SPEED;
+    }
+
+    this.setState({
+      speed: currentSpeed,
+    });
+  };
+
   snakeGrow = () => {
     const snakeCoordinates = [...this.state.snakePosition];
 
@@ -295,10 +317,11 @@ class App extends Component {
       lastScoresCopy.push(this.state.score);
     }
 
+    this.checkCurrentSpeed(this.state.isHard);
+
     this.setState({
       snakePosition: constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
-      speed: constants.SPEED,
       isGameOver: true,
       lastScores: lastScoresCopy,
     });
@@ -358,6 +381,22 @@ class App extends Component {
     event.target.blur();
   };
 
+  hardModeHandler = (event) => {
+    this.setState({ isHard: event.target.checked });
+
+    if (event.target.checked) {
+      this.setState({
+        speed: constants.SPEED / 3,
+      });
+      localStorage.setItem('isHard', JSON.stringify(event.target.checked));
+    } else {
+      this.setState({
+        speed: constants.SPEED,
+      });
+      localStorage.setItem('isHard', JSON.stringify(event.target.checked));
+    }
+  };
+
   render() {
     return (
       <div className={classes.app}>
@@ -371,6 +410,8 @@ class App extends Component {
               audioVolumeHandler: this.audioVolumeHandler,
               audioVolume: this.state.audioVolume,
               lastScores: this.state.lastScores,
+              hardModeHandler: this.hardModeHandler,
+              isHard: this.state.isHard,
             }}
           >
             <Controls

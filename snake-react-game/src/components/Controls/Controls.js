@@ -36,7 +36,7 @@ const Controls = (props) => {
         </Button>
       )}
 
-      <Button variant="contained" color="primary" onClick={props.goFull}>
+      <Button variant="contained" color="primary" onClick={props.goFullScreen}>
         <FullscreenIcon />
       </Button>
 

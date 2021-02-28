@@ -23,17 +23,17 @@ class App extends Component {
     lastScores: [],
     isVolume: true,
     isMusic: false,
-    isFull: false,
+    isFullScreen: false,
     isHard: false,
     audioVolume: 100,
   };
 
   audio = new Audio(biteSound);
 
-  goFull = (event) => {
+  goFullScreen = (event) => {
     this.setState((prevState) => {
       return {
-        isFull: !prevState.isFull,
+        isFullScreen: !prevState.isFullScreen,
       };
     });
 
@@ -43,7 +43,7 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.keydownHandler.bind(this));
 
-    const isBestScore = localStorage.getItem('bestScore') > 0;
+    const isBestScore = localStorage.getItem('bestScore');
     const updateScore = isBestScore ? localStorage.getItem('bestScore') : 0;
 
     const isSavedVolume = localStorage.getItem('audioVolume');
@@ -401,8 +401,8 @@ class App extends Component {
     return (
       <div className={classes.app}>
         <Fullscreen
-          enabled={this.state.isFull}
-          onChange={(isFull) => this.setState({ isFull })}
+          enabled={this.state.isFullScreen}
+          onChange={(isFullScreen) => this.setState({ isFullScreen })}
         >
           <Context.Provider
             value={{
@@ -421,15 +421,15 @@ class App extends Component {
               isMusic={this.state.isMusic}
               volumeToggle={this.volumeToggleHandler}
               musicToggle={this.musicToggleHandler}
-              goFull={this.goFull.bind(this)}
-              isFull={this.state.isFull}
+              goFullScreen={this.goFullScreen.bind(this)}
+              isFullScreen={this.state.isFullScreen}
             />
           </Context.Provider>
 
           <div>
             <div
               className={`${classes.app__field} ${
-                this.state.isFull ? classes.app__fullScreen : null
+                this.state.isFullScreen ? classes.app__fullScreen : null
               }`}
             >
               <Snake

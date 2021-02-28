@@ -20,6 +20,7 @@ class App extends Component {
     isGamePause: true,
     score: 0,
     bestScore: 0,
+    lastScores: [],
     isVolume: true,
     isMusic: false,
     isFull: false,
@@ -49,9 +50,15 @@ class App extends Component {
       ? localStorage.getItem('audioVolume')
       : this.state.audioVolume;
 
+    const isLastScores = JSON.parse(localStorage.getItem('lastScores'));
+    const updateLastScores = isLastScores
+      ? JSON.parse(localStorage.getItem('lastScores'))
+      : this.state.lastScores;
+
     this.setState({
       bestScore: updateScore,
       audioVolume: updateVolume,
+      lastScores: updateLastScores,
     });
   }
 
@@ -280,11 +287,20 @@ class App extends Component {
   };
 
   isGameOver = () => {
+    const lastScoresCopy = [...this.state.lastScores];
+    if (lastScoresCopy.length >= 10) {
+      lastScoresCopy.push(this.state.score);
+      lastScoresCopy.shift();
+    } else {
+      lastScoresCopy.push(this.state.score);
+    }
+
     this.setState({
       snakePosition: constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
       speed: constants.SPEED,
       isGameOver: true,
+      lastScores: lastScoresCopy,
     });
 
     if (this.state.score > this.state.bestScore) {
@@ -296,6 +312,7 @@ class App extends Component {
       });
     }
 
+    localStorage.setItem('lastScores', JSON.stringify(lastScoresCopy));
     clearInterval(this.state.intervalId);
   };
 
@@ -353,6 +370,7 @@ class App extends Component {
               bestScore: this.state.bestScore,
               audioVolumeHandler: this.audioVolumeHandler,
               audioVolume: this.state.audioVolume,
+              lastScores: this.state.lastScores,
             }}
           >
             <Controls

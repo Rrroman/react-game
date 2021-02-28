@@ -81,7 +81,7 @@ export default function ScrollableTabsButtonAuto(props) {
         <Hotkeys />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h3>Best Score: {Context.bestScore}</h3>
+        <h3>Best Score: {scoreContext.bestScore}</h3>
         <h3>10 Last Scores:</h3>
         <ul>
           {reversedScores.map((score, index) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const BestScoreContext = React.createContext({
+const Context = React.createContext({
   bestScore: 0,
   audioVolumeHandler: () => {},
   audioVolume: 0,
   lastScores: 0,
 });
 
-export default BestScoreContext;
+export default Context;

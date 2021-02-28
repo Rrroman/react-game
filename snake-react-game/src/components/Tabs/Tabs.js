@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Hotkeys from './Hotkeys/Hotkeys';
-import BestScoreContext from '../../context/BestScore-context';
+import Context from '../../context/Context';
 import ContinuousSlider from './VolumeSlider/VolumeSlider';
 
 function TabPanel(props) {
@@ -53,10 +53,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const bestScoreContext = useContext(BestScoreContext);
-  const reversedScores = bestScoreContext.lastScores
-    .map((item) => item)
-    .reverse();
+  const scoreContext = useContext(Context);
+  const reversedScores = scoreContext.lastScores.map((item) => item).reverse();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,7 +81,7 @@ export default function ScrollableTabsButtonAuto(props) {
         <Hotkeys />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h3>Best Score: {bestScoreContext.bestScore}</h3>
+        <h3>Best Score: {Context.bestScore}</h3>
         <h3>10 Last Scores:</h3>
         <ul>
           {reversedScores.map((score, index) => {

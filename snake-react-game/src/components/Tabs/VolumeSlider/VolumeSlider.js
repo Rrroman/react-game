@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
-import BestScoreContext from '../../../context/BestScore-context';
+import Context from '../../../context/Context';
 
 const useStyles = makeStyles({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 export default function ContinuousSlider() {
   const classes = useStyles();
-  const audioVolumeContext = useContext(BestScoreContext);
+  const audioVolumeContext = useContext(Context);
 
   const [value, setValue] = React.useState(
     parseInt(audioVolumeContext.audioVolume),

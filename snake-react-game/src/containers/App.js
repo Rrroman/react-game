@@ -8,7 +8,7 @@ import Controls from '../components/Controls/Controls';
 import biteSound from '../assets/bite.mp3';
 import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 import Footer from '../components/Footer/Footer';
-import BestScoreContext from '../context/BestScore-context';
+import Context from '../context/Context';
 
 class App extends Component {
   state = {
@@ -365,7 +365,7 @@ class App extends Component {
           enabled={this.state.isFull}
           onChange={(isFull) => this.setState({ isFull })}
         >
-          <BestScoreContext.Provider
+          <Context.Provider
             value={{
               bestScore: this.state.bestScore,
               audioVolumeHandler: this.audioVolumeHandler,
@@ -383,7 +383,7 @@ class App extends Component {
               goFull={this.goFull.bind(this)}
               isFull={this.state.isFull}
             />
-          </BestScoreContext.Provider>
+          </Context.Provider>
 
           <div>
             <div

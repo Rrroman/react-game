@@ -75,29 +75,12 @@ export default function ScrollableTabsButtonAuto(props) {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="Hot Keys" {...a11yProps(0)} />
+          <Tab label="Settings" {...a11yProps(0)} />
           <Tab label="Score Statistic" {...a11yProps(1)} />
-          <Tab label="Settings" {...a11yProps(2)} />
+          <Tab label="Hot Keys" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Hotkeys />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <h3>Best Score: {scoreContext.bestScore}</h3>
-        <h3>10 Last Scores:</h3>
-        <ul>
-          {reversedScores.map((score, index) => {
-            return (
-              <li key={index}>
-                {index + 1}
-                {')'} {score}
-              </li>
-            );
-          })}
-        </ul>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
         <div style={{ paddingTop: '20px' }}>
           <ContinuousSlider />
           <p style={{ marginBottom: 0, fontWeight: 'bold' }}>Game Settings:</p>
@@ -118,6 +101,23 @@ export default function ScrollableTabsButtonAuto(props) {
             <span>Large</span>
           </div>
         </div>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <h3>Best Score: {scoreContext.bestScore}</h3>
+        <h3>10 Last Scores:</h3>
+        <ul>
+          {reversedScores.map((score, index) => {
+            return (
+              <li key={index}>
+                {index + 1}
+                {')'} {score}
+              </li>
+            );
+          })}
+        </ul>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Hotkeys />
       </TabPanel>
     </div>
   );

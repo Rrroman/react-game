@@ -34,9 +34,15 @@ const Controls = (props) => {
       <Button variant="contained" color="primary" onClick={props.clicked}>
         Play
       </Button>
-      <Button variant="contained" color="primary" onClick={props.volumeToggle}>
-        {volumeIcon}
-      </Button>
+      {props.isFullScreen ? null : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={props.volumeToggle}
+        >
+          {volumeIcon}
+        </Button>
+      )}
       {props.isFullScreen ? null : (
         <Button variant="contained" color="primary" onClick={props.musicToggle}>
           {musicIcon}

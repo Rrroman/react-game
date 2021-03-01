@@ -7,6 +7,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import Popup from '../Popup/Popup';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 
 const Controls = (props) => {
   const volumeIcon = props.isVolume ? (
@@ -21,6 +22,12 @@ const Controls = (props) => {
     <YouTubeIcon style={{ color: 'white' }}></YouTubeIcon>
   );
 
+  const fullScreenIcon = props.isFullScreen ? (
+    <FullscreenExitIcon />
+  ) : (
+    <FullscreenIcon />
+  );
+
   return (
     <div className={classes.controls__wrapper}>
       <div className={classes.controls__score}>Score: {props.score}</div>
@@ -30,17 +37,17 @@ const Controls = (props) => {
       <Button variant="contained" color="primary" onClick={props.volumeToggle}>
         {volumeIcon}
       </Button>
-      {props.isFull ? null : (
+      {props.isFullScreen ? null : (
         <Button variant="contained" color="primary" onClick={props.musicToggle}>
           {musicIcon}
         </Button>
       )}
 
       <Button variant="contained" color="primary" onClick={props.goFullScreen}>
-        <FullscreenIcon />
+        {fullScreenIcon}
       </Button>
 
-      {props.isFull ? null : <Popup />}
+      {props.isFullScreen ? null : <Popup />}
     </div>
   );
 };

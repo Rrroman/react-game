@@ -1,27 +1,28 @@
 {
   "files": {
-    "main.css": "/react-game/snake-react-game/static/css/main.63a98a28.chunk.css",
-    "main.js": "/react-game/snake-react-game/static/js/main.34211d29.chunk.js",
-    "main.js.map": "/react-game/snake-react-game/static/js/main.34211d29.chunk.js.map",
-    "runtime-main.js": "/react-game/snake-react-game/static/js/runtime-main.e7e9939a.js",
-    "runtime-main.js.map": "/react-game/snake-react-game/static/js/runtime-main.e7e9939a.js.map",
-    "static/js/2.f60d4ef0.chunk.js": "/react-game/snake-react-game/static/js/2.f60d4ef0.chunk.js",
-    "static/js/2.f60d4ef0.chunk.js.map": "/react-game/snake-react-game/static/js/2.f60d4ef0.chunk.js.map",
-    "static/js/3.2a19f760.chunk.js": "/react-game/snake-react-game/static/js/3.2a19f760.chunk.js",
-    "static/js/3.2a19f760.chunk.js.map": "/react-game/snake-react-game/static/js/3.2a19f760.chunk.js.map",
+    "main.css": "/react-game/snake-react-game/static/css/main.1785eb00.chunk.css",
+    "main.js": "/react-game/snake-react-game/static/js/main.8970f06c.chunk.js",
+    "main.js.map": "/react-game/snake-react-game/static/js/main.8970f06c.chunk.js.map",
+    "runtime-main.js": "/react-game/snake-react-game/static/js/runtime-main.769f904f.js",
+    "runtime-main.js.map": "/react-game/snake-react-game/static/js/runtime-main.769f904f.js.map",
+    "static/js/2.5bb9dc75.chunk.js": "/react-game/snake-react-game/static/js/2.5bb9dc75.chunk.js",
+    "static/js/2.5bb9dc75.chunk.js.map": "/react-game/snake-react-game/static/js/2.5bb9dc75.chunk.js.map",
+    "static/js/3.cf709ee0.chunk.js": "/react-game/snake-react-game/static/js/3.cf709ee0.chunk.js",
+    "static/js/3.cf709ee0.chunk.js.map": "/react-game/snake-react-game/static/js/3.cf709ee0.chunk.js.map",
     "index.html": "/react-game/snake-react-game/index.html",
-    "static/css/main.63a98a28.chunk.css.map": "/react-game/snake-react-game/static/css/main.63a98a28.chunk.css.map",
-    "static/js/2.f60d4ef0.chunk.js.LICENSE.txt": "/react-game/snake-react-game/static/js/2.f60d4ef0.chunk.js.LICENSE.txt",
-    "static/media/Fruit.module.css": "/react-game/snake-react-game/static/media/apple-compressed.33c1eec7.svg",
+    "static/css/main.1785eb00.chunk.css.map": "/react-game/snake-react-game/static/css/main.1785eb00.chunk.css.map",
+    "static/js/2.5bb9dc75.chunk.js.LICENSE.txt": "/react-game/snake-react-game/static/js/2.5bb9dc75.chunk.js.LICENSE.txt",
+    "static/media/apple-compressed.33c1eec7.svg": "/react-game/snake-react-game/static/media/apple-compressed.33c1eec7.svg",
+    "static/media/banana-compressed.2307fede.svg": "/react-game/snake-react-game/static/media/banana-compressed.2307fede.svg",
     "static/media/bite.1e6ccb0d.mp3": "/react-game/snake-react-game/static/media/bite.1e6ccb0d.mp3",
     "static/media/Snake.module.css": "/react-game/snake-react-game/static/media/tongue-out-compressed.4a61b9ae.svg",
     "static/media/App.module.css": "/react-game/snake-react-game/static/media/organic-compressed.cac3033f.svg",
     "static/media/rs_school_js.d7e49236.svg": "/react-game/snake-react-game/static/media/rs_school_js.d7e49236.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e7e9939a.js",
-    "static/js/2.f60d4ef0.chunk.js",
-    "static/css/main.63a98a28.chunk.css",
-    "static/js/main.34211d29.chunk.js"
+    "static/js/runtime-main.769f904f.js",
+    "static/js/2.5bb9dc75.chunk.js",
+    "static/css/main.1785eb00.chunk.css",
+    "static/js/main.8970f06c.chunk.js"
   ]
 }

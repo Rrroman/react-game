@@ -53,7 +53,9 @@ const Controls = (props) => {
         {fullScreenIcon}
       </Button>
 
-      {props.isFullScreen ? null : <Popup />}
+      {props.isFullScreen ? null : (
+        <Popup style={{ width: '100%', height: '100%' }} />
+      )}
     </div>
   );
 };

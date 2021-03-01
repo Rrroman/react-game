@@ -33,13 +33,12 @@ class App extends Component {
   audio = new Audio(biteSound);
 
   goFullScreen = (event) => {
+    event.target.closest('button').blur();
     this.setState((prevState) => {
       return {
         isFullScreen: !prevState.isFullScreen,
       };
     });
-
-    event.target.blur();
   };
 
   componentDidMount() {
@@ -358,7 +357,8 @@ class App extends Component {
     clearInterval(this.state.intervalId);
   };
 
-  startGameHandler = (event) => {
+  playGameHandler = (event) => {
+    event.target.closest('button').blur();
     if (this.state.isGameOver || this.state.isGamePause) {
       const intervalId = setInterval(this.moveSnake, this.state.speed);
       this.setState({
@@ -368,18 +368,15 @@ class App extends Component {
         score: 0,
       });
     }
-
-    event.target.blur();
   };
 
   volumeToggleHandler = (event) => {
+    event.target.closest('button').blur();
     this.setState((prevState) => {
       return {
         isVolume: !prevState.isVolume,
       };
     });
-
-    event.target.blur();
   };
 
   audioVolumeHandler = (newVolume) => {
@@ -391,16 +388,16 @@ class App extends Component {
   };
 
   musicToggleHandler = (event) => {
+    event.target.blur();
     this.setState((prevState) => {
       return {
         isMusic: !prevState.isMusic,
       };
     });
-
-    event.target.blur();
   };
 
   hardModeHandler = (event) => {
+    event.target.blur();
     this.setState({ isHard: event.target.checked });
 
     if (event.target.checked) {
@@ -430,9 +427,11 @@ class App extends Component {
       });
       localStorage.setItem('isBanana', JSON.stringify(event.target.checked));
     }
+    event.target.blur();
   };
 
   fieldSwitchHandler = (event) => {
+    event.target.blur();
     this.setState({ isFieldLarge: event.target.checked });
 
     if (event.target.checked) {
@@ -478,7 +477,7 @@ class App extends Component {
             }}
           >
             <Controls
-              clicked={this.startGameHandler.bind(this)}
+              clicked={this.playGameHandler.bind(this)}
               score={this.state.score}
               isVolume={this.state.isVolume}
               isMusic={this.state.isMusic}

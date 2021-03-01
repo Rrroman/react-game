@@ -33,7 +33,7 @@ export default function SimpleModal(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = (event) => {
-    event.target.blur();
+    event.target.closest('button').blur();
     setOpen(true);
   };
 

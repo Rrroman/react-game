@@ -25,6 +25,7 @@ class App extends Component {
     isMusic: false,
     isFullScreen: false,
     isHard: false,
+    isBanana: false,
     audioVolume: 100,
   };
 
@@ -43,32 +44,13 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.keydownHandler.bind(this));
 
-    const isBestScore = localStorage.getItem('bestScore');
-    const updateScore = isBestScore ? localStorage.getItem('bestScore') : 0;
+    this.checkLocalStorage('bestScore');
+    this.checkLocalStorage('audioVolume');
+    this.checkLocalStorage('lastScores');
+    this.checkLocalStorage('isHard');
+    this.checkLocalStorage('isBanana');
 
-    const isSavedVolume = localStorage.getItem('audioVolume');
-    const updateVolume = isSavedVolume
-      ? localStorage.getItem('audioVolume')
-      : this.state.audioVolume;
-
-    const isLastScores = JSON.parse(localStorage.getItem('lastScores'));
-    const updateLastScores = isLastScores
-      ? JSON.parse(localStorage.getItem('lastScores'))
-      : this.state.lastScores;
-
-    const isHardMode = JSON.parse(localStorage.getItem('isHard'));
-    const updateIsHardMode = isHardMode
-      ? JSON.parse(localStorage.getItem('isHard'))
-      : this.state.isHard;
-
-    this.checkCurrentSpeed(updateIsHardMode);
-
-    this.setState({
-      bestScore: updateScore,
-      audioVolume: updateVolume,
-      lastScores: updateLastScores,
-      isHard: updateIsHardMode,
-    });
+    this.checkCurrentSpeed(JSON.parse(localStorage.getItem('isHard')));
   }
 
   componentDidUpdate() {
@@ -83,6 +65,17 @@ class App extends Component {
       return;
     };
   }
+
+  checkLocalStorage = (keyForCheck) => {
+    const isKeyForCheck = localStorage.getItem(keyForCheck);
+    const updateForKey = isKeyForCheck
+      ? JSON.parse(localStorage.getItem(keyForCheck))
+      : this.state[keyForCheck];
+
+    this.setState({
+      [keyForCheck]: updateForKey,
+    });
+  };
 
   keydownHandler(event) {
     switch (event.keyCode) {
@@ -272,7 +265,7 @@ class App extends Component {
   checkCurrentSpeed = (checker) => {
     let currentSpeed = null;
     if (checker) {
-      currentSpeed = constants.SPEED / 3;
+      currentSpeed = constants.SPEED / constants.HARD_MODE_DELIMITER;
     } else {
       currentSpeed = constants.SPEED;
     }
@@ -327,7 +320,7 @@ class App extends Component {
     });
 
     if (this.state.score > this.state.bestScore) {
-      localStorage.setItem('bestScore', this.state.score);
+      localStorage.setItem('bestScore', JSON.stringify(this.state.score));
       this.setState((prevState) => {
         return {
           bestScore: prevState.score,
@@ -368,7 +361,7 @@ class App extends Component {
       audioVolume: newVolume,
     });
 
-    localStorage.setItem('audioVolume', this.state.audioVolume);
+    localStorage.setItem('audioVolume', JSON.stringify(this.state.audioVolume));
   };
 
   musicToggleHandler = (event) => {
@@ -386,7 +379,7 @@ class App extends Component {
 
     if (event.target.checked) {
       this.setState({
-        speed: constants.SPEED / 3,
+        speed: constants.SPEED / constants.HARD_MODE_DELIMITER,
       });
       localStorage.setItem('isHard', JSON.stringify(event.target.checked));
     } else {
@@ -394,6 +387,22 @@ class App extends Component {
         speed: constants.SPEED,
       });
       localStorage.setItem('isHard', JSON.stringify(event.target.checked));
+    }
+  };
+
+  foodIconSwitchHandler = (event) => {
+    this.setState({ isBanana: event.target.checked });
+
+    if (event.target.checked) {
+      this.setState({
+        isBanana: true,
+      });
+      localStorage.setItem('isBanana', JSON.stringify(event.target.checked));
+    } else {
+      this.setState({
+        isBanana: false,
+      });
+      localStorage.setItem('isBanana', JSON.stringify(event.target.checked));
     }
   };
 
@@ -412,6 +421,8 @@ class App extends Component {
               lastScores: this.state.lastScores,
               hardModeHandler: this.hardModeHandler,
               isHard: this.state.isHard,
+              foodIconSwitchHandler: this.foodIconSwitchHandler,
+              isBanana: this.state.isBanana,
             }}
           >
             <Controls
@@ -441,6 +452,7 @@ class App extends Component {
               <Fruit
                 fruitPosition={this.state.fruitPosition}
                 size={constants.SIZE}
+                isBanana={this.state.isBanana}
               />
             </div>
           </div>

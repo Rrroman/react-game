@@ -6,7 +6,9 @@ const Context = React.createContext({
   audioVolume: 0,
   lastScores: 0,
   hardModeHandler: () => {},
-  isHard: null,
+  isHard: false,
+  foodIconSwitchHandler: () => {},
+  isBanana: false,
 });
 
 export default Context;

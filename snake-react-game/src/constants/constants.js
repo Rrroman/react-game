@@ -1,6 +1,7 @@
 const constants = {
   SIZE: 4,
   SPEED: 150,
+  HARD_MODE_DELIMITER: 3,
   SPEED_FAST: 50,
   SPEED_STEP: 10,
   MAX_POSITION: 98,

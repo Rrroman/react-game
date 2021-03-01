@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/react-game/snake-react-game/static/css/main.1785eb00.chunk.css",
-    "main.js": "/react-game/snake-react-game/static/js/main.cdb2b3a9.chunk.js",
-    "main.js.map": "/react-game/snake-react-game/static/js/main.cdb2b3a9.chunk.js.map",
-    "runtime-main.js": "/react-game/snake-react-game/static/js/runtime-main.769f904f.js",
-    "runtime-main.js.map": "/react-game/snake-react-game/static/js/runtime-main.769f904f.js.map",
-    "static/js/2.5bb9dc75.chunk.js": "/react-game/snake-react-game/static/js/2.5bb9dc75.chunk.js",
-    "static/js/2.5bb9dc75.chunk.js.map": "/react-game/snake-react-game/static/js/2.5bb9dc75.chunk.js.map",
-    "static/js/3.cf709ee0.chunk.js": "/react-game/snake-react-game/static/js/3.cf709ee0.chunk.js",
-    "static/js/3.cf709ee0.chunk.js.map": "/react-game/snake-react-game/static/js/3.cf709ee0.chunk.js.map",
+    "main.js": "/react-game/snake-react-game/static/js/main.7398c096.chunk.js",
+    "main.js.map": "/react-game/snake-react-game/static/js/main.7398c096.chunk.js.map",
+    "runtime-main.js": "/react-game/snake-react-game/static/js/runtime-main.fcd41e87.js",
+    "runtime-main.js.map": "/react-game/snake-react-game/static/js/runtime-main.fcd41e87.js.map",
+    "static/js/2.f6c0d1db.chunk.js": "/react-game/snake-react-game/static/js/2.f6c0d1db.chunk.js",
+    "static/js/2.f6c0d1db.chunk.js.map": "/react-game/snake-react-game/static/js/2.f6c0d1db.chunk.js.map",
+    "static/js/3.0b78e47c.chunk.js": "/react-game/snake-react-game/static/js/3.0b78e47c.chunk.js",
+    "static/js/3.0b78e47c.chunk.js.map": "/react-game/snake-react-game/static/js/3.0b78e47c.chunk.js.map",
     "index.html": "/react-game/snake-react-game/index.html",
     "static/css/main.1785eb00.chunk.css.map": "/react-game/snake-react-game/static/css/main.1785eb00.chunk.css.map",
-    "static/js/2.5bb9dc75.chunk.js.LICENSE.txt": "/react-game/snake-react-game/static/js/2.5bb9dc75.chunk.js.LICENSE.txt",
+    "static/js/2.f6c0d1db.chunk.js.LICENSE.txt": "/react-game/snake-react-game/static/js/2.f6c0d1db.chunk.js.LICENSE.txt",
     "static/media/apple-compressed.33c1eec7.svg": "/react-game/snake-react-game/static/media/apple-compressed.33c1eec7.svg",
     "static/media/banana-compressed.2307fede.svg": "/react-game/snake-react-game/static/media/banana-compressed.2307fede.svg",
     "static/media/bite.1e6ccb0d.mp3": "/react-game/snake-react-game/static/media/bite.1e6ccb0d.mp3",
@@ -20,9 +20,9 @@
     "static/media/rs_school_js.d7e49236.svg": "/react-game/snake-react-game/static/media/rs_school_js.d7e49236.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.769f904f.js",
-    "static/js/2.5bb9dc75.chunk.js",
+    "static/js/runtime-main.fcd41e87.js",
+    "static/js/2.f6c0d1db.chunk.js",
     "static/css/main.1785eb00.chunk.css",
-    "static/js/main.cdb2b3a9.chunk.js"
+    "static/js/main.7398c096.chunk.js"
   ]
 }

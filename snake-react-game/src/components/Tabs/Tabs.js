@@ -111,6 +111,7 @@ export default function ScrollableTabsButtonAuto(props) {
             <FoodSwitch />
             <span>Banana</span>
           </div>
+          <p style={{ marginBottom: 0, fontWeight: 'bold' }}>Field Size:</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span>Normal</span>
             <FieldSwitch />

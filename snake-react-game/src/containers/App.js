@@ -265,7 +265,7 @@ class App extends Component {
         } else {
           return {
             fruitPosition: constants.FRUIT_POSITION(),
-            speed: prevState.speed - 1,
+            speed: prevState.speed > 1 ? prevState.speed - 1 : 1,
             score: prevState.snakePosition.length * constants.SPEED_STEP,
           };
         }

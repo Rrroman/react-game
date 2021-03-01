@@ -16,6 +16,11 @@ const constants = {
     [2, 0],
     [4, 0],
   ],
+  LARGE_FIELD_STARTING_SNAKE_POSITION: [
+    [0, 0],
+    [1, 0],
+    [2, 0],
+  ],
   FRUIT_POSITION: () => [
     Math.floor(
       (Math.random() * constants.MAX_POSITION + constants.MIN_POSITION) /

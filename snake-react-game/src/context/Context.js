@@ -9,6 +9,8 @@ const Context = React.createContext({
   isHard: false,
   foodIconSwitchHandler: () => {},
   isBanana: false,
+  fieldSwitchHandler: () => {},
+  isFieldLarge: false,
 });
 
 export default Context;

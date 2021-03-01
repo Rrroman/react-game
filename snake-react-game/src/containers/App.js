@@ -26,6 +26,7 @@ class App extends Component {
     isFullScreen: false,
     isHard: false,
     isBanana: false,
+    isFieldLarge: false,
     audioVolume: 100,
   };
 
@@ -49,6 +50,13 @@ class App extends Component {
     this.checkLocalStorage('lastScores');
     this.checkLocalStorage('isHard');
     this.checkLocalStorage('isBanana');
+    const isFieldLarge = this.checkLocalStorage('isFieldLarge');
+
+    if (isFieldLarge) {
+      this.setState({
+        snakePosition: constants.LARGE_FIELD_STARTING_SNAKE_POSITION,
+      });
+    }
 
     this.checkCurrentSpeed(JSON.parse(localStorage.getItem('isHard')));
   }
@@ -75,6 +83,8 @@ class App extends Component {
     this.setState({
       [keyForCheck]: updateForKey,
     });
+
+    return updateForKey;
   };
 
   keydownHandler(event) {
@@ -157,26 +167,38 @@ class App extends Component {
     switch (this.state.direction) {
       case constants.LEFT:
         headCoordinates = [
-          headCoordinates[0] - constants.SPACE_BETWEEN_SNAKE_PIECES,
+          headCoordinates[0] -
+            (this.state.isFieldLarge
+              ? constants.SPACE_BETWEEN_SNAKE_PIECES / 2
+              : constants.SPACE_BETWEEN_SNAKE_PIECES),
           headCoordinates[1],
         ];
         break;
       case constants.TOP:
         headCoordinates = [
           headCoordinates[0],
-          headCoordinates[1] - constants.SPACE_BETWEEN_SNAKE_PIECES,
+          headCoordinates[1] -
+            (this.state.isFieldLarge
+              ? constants.SPACE_BETWEEN_SNAKE_PIECES / 2
+              : constants.SPACE_BETWEEN_SNAKE_PIECES),
         ];
         break;
       case constants.RIGHT:
         headCoordinates = [
-          headCoordinates[0] + constants.SPACE_BETWEEN_SNAKE_PIECES,
+          headCoordinates[0] +
+            (this.state.isFieldLarge
+              ? constants.SPACE_BETWEEN_SNAKE_PIECES / 2
+              : constants.SPACE_BETWEEN_SNAKE_PIECES),
           headCoordinates[1],
         ];
         break;
       case constants.BOTTOM:
         headCoordinates = [
           headCoordinates[0],
-          headCoordinates[1] + constants.SPACE_BETWEEN_SNAKE_PIECES,
+          headCoordinates[1] +
+            (this.state.isFieldLarge
+              ? constants.SPACE_BETWEEN_SNAKE_PIECES / 2
+              : constants.SPACE_BETWEEN_SNAKE_PIECES),
         ];
         break;
       default:
@@ -197,9 +219,11 @@ class App extends Component {
 
     if (
       headCoordinates[0] < 0 ||
-      headCoordinates[0] >= constants.MAX_POSITION ||
+      headCoordinates[0] >=
+        (this.state.isFieldLarge ? 100 : constants.MAX_POSITION) ||
       headCoordinates[1] < 0 ||
-      headCoordinates[1] >= constants.MAX_POSITION
+      headCoordinates[1] >=
+        (this.state.isFieldLarge ? 100 : constants.MAX_POSITION)
     ) {
       this.isGameOver();
     }
@@ -313,7 +337,9 @@ class App extends Component {
     this.checkCurrentSpeed(this.state.isHard);
 
     this.setState({
-      snakePosition: constants.STARTING_SNAKE_POSITION,
+      snakePosition: this.state.isFieldLarge
+        ? constants.LARGE_FIELD_STARTING_SNAKE_POSITION
+        : constants.STARTING_SNAKE_POSITION,
       direction: constants.RIGHT,
       isGameOver: true,
       lastScores: lastScoresCopy,
@@ -406,6 +432,30 @@ class App extends Component {
     }
   };
 
+  fieldSwitchHandler = (event) => {
+    this.setState({ isFieldLarge: event.target.checked });
+
+    if (event.target.checked) {
+      this.setState({
+        isFieldLarge: true,
+        snakePosition: constants.LARGE_FIELD_STARTING_SNAKE_POSITION,
+      });
+      localStorage.setItem(
+        'isFieldLarge',
+        JSON.stringify(event.target.checked),
+      );
+    } else {
+      this.setState({
+        isFieldLarge: false,
+        snakePosition: constants.STARTING_SNAKE_POSITION,
+      });
+      localStorage.setItem(
+        'isFieldLarge',
+        JSON.stringify(event.target.checked),
+      );
+    }
+  };
+
   render() {
     return (
       <div className={classes.app}>
@@ -423,6 +473,8 @@ class App extends Component {
               isHard: this.state.isHard,
               foodIconSwitchHandler: this.foodIconSwitchHandler,
               isBanana: this.state.isBanana,
+              fieldSwitchHandler: this.fieldSwitchHandler,
+              isFieldLarge: this.state.isFieldLarge,
             }}
           >
             <Controls
@@ -447,11 +499,15 @@ class App extends Component {
                 snakePosition={this.state.snakePosition}
                 direction={this.state.direction}
                 isGameOver={this.state.isGameOver}
-                size={constants.SIZE}
+                size={
+                  this.state.isFieldLarge ? constants.SIZE / 2 : constants.SIZE
+                }
               />
               <Fruit
                 fruitPosition={this.state.fruitPosition}
-                size={constants.SIZE}
+                size={
+                  this.state.isFieldLarge ? constants.SIZE / 2 : constants.SIZE
+                }
                 isBanana={this.state.isBanana}
               />
             </div>

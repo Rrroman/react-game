@@ -10,6 +10,7 @@ import Context from '../../context/Context';
 import ContinuousSlider from './VolumeSlider/VolumeSlider';
 import Switch from './Switch/Switch';
 import FoodSwitch from './Switch/FoodSwitch';
+import FieldSwitch from './Switch/FieldSizeSwitch';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -109,6 +110,11 @@ export default function ScrollableTabsButtonAuto(props) {
             <span>Apple</span>
             <FoodSwitch />
             <span>Banana</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span>Normal</span>
+            <FieldSwitch />
+            <span>Large</span>
           </div>
         </div>
       </TabPanel>

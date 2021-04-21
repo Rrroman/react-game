@@ -9,53 +9,62 @@ import Popup from '../Popup/Popup';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 
-const Controls = (props) => {
-  const volumeIcon = props.isVolume ? (
-    <VolumeUpIcon style={{ color: 'white' }}></VolumeUpIcon>
+const Controls = ({
+  isVolume,
+  isMusic,
+  isFullScreen,
+  volumeToggle,
+  score,
+  clicked,
+  musicToggle,
+  goFullScreen,
+}) => {
+  const volumeIcon = isVolume ? (
+    <VolumeUpIcon className={classes.white}></VolumeUpIcon>
   ) : (
-    <VolumeOffIcon style={{ color: 'white' }}></VolumeOffIcon>
+    <VolumeOffIcon className={classes.white}></VolumeOffIcon>
   );
 
-  const musicIcon = props.isMusic ? (
-    <SubscriptionsIcon style={{ color: 'white' }}></SubscriptionsIcon>
+  const musicIcon = isMusic ? (
+    <SubscriptionsIcon className={classes.white}></SubscriptionsIcon>
   ) : (
-    <YouTubeIcon style={{ color: 'white' }}></YouTubeIcon>
+    <YouTubeIcon className={classes.white}></YouTubeIcon>
   );
 
-  const fullScreenIcon = props.isFullScreen ? (
+  const fullScreenIcon = isFullScreen ? (
     <FullscreenExitIcon />
   ) : (
     <FullscreenIcon />
   );
 
+  const volumeButton = isFullScreen ? null : (
+    <Button variant="contained" color="primary" onClick={volumeToggle}>
+      {volumeIcon}
+    </Button>
+  );
+
+  const musicButton = isFullScreen ? null : (
+    <Button variant="contained" color="primary" onClick={musicToggle}>
+      {musicIcon}
+    </Button>
+  );
+
+  const settingsButton = isFullScreen ? null : (
+    <Popup className={classes.popup} />
+  );
+
   return (
     <div className={classes.controls__wrapper}>
-      <div className={classes.controls__score}>Score: {props.score}</div>
-      <Button variant="contained" color="primary" onClick={props.clicked}>
+      <div className={classes.controls__score}>Score: {score}</div>
+      <Button variant="contained" color="primary" onClick={clicked}>
         Play
       </Button>
-      {props.isFullScreen ? null : (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={props.volumeToggle}
-        >
-          {volumeIcon}
-        </Button>
-      )}
-      {props.isFullScreen ? null : (
-        <Button variant="contained" color="primary" onClick={props.musicToggle}>
-          {musicIcon}
-        </Button>
-      )}
-
-      <Button variant="contained" color="primary" onClick={props.goFullScreen}>
+      {volumeButton}
+      {musicButton}
+      <Button variant="contained" color="primary" onClick={goFullScreen}>
         {fullScreenIcon}
       </Button>
-
-      {props.isFullScreen ? null : (
-        <Popup style={{ width: '100%', height: '100%' }} />
-      )}
+      {settingsButton}
     </div>
   );
 };

@@ -73,6 +73,10 @@ class App extends Component {
     };
   }
 
+  setLocalStorage(name, value) {
+    localStorage.setItem(name, JSON.stringify(value));
+  }
+
   checkLocalStorage = (keyForCheck) => {
     const isKeyForCheck = localStorage.getItem(keyForCheck);
     const updateForKey = isKeyForCheck
@@ -345,7 +349,7 @@ class App extends Component {
     });
 
     if (this.state.score > this.state.bestScore) {
-      localStorage.setItem('bestScore', JSON.stringify(this.state.score));
+      this.setLocalStorage('bestScore', this.state.score);
       this.setState((prevState) => {
         return {
           bestScore: prevState.score,
@@ -353,7 +357,7 @@ class App extends Component {
       });
     }
 
-    localStorage.setItem('lastScores', JSON.stringify(lastScoresCopy));
+    this.setLocalStorage('lastScores', lastScoresCopy);
     clearInterval(this.state.intervalId);
   };
 
@@ -384,7 +388,7 @@ class App extends Component {
       audioVolume: newVolume,
     });
 
-    localStorage.setItem('audioVolume', JSON.stringify(this.state.audioVolume));
+    this.setLocalStorage('audioVolume', this.state.audioVolume);
   };
 
   musicToggleHandler = (event) => {
@@ -399,63 +403,57 @@ class App extends Component {
   hardModeHandler = (event) => {
     event.target.blur();
     this.setState({ isHard: event.target.checked });
+    this.setLocalStorage('isHard', event.target.checked);
 
     if (event.target.checked) {
       this.setState({
         speed: constants.SPEED / constants.HARD_MODE_DELIMITER,
       });
-      localStorage.setItem('isHard', JSON.stringify(event.target.checked));
     } else {
       this.setState({
         speed: constants.SPEED,
       });
-      localStorage.setItem('isHard', JSON.stringify(event.target.checked));
     }
   };
 
   foodIconSwitchHandler = (event) => {
     this.setState({ isBanana: event.target.checked });
+    this.setLocalStorage('isBanana', event.target.checked);
 
     if (event.target.checked) {
       this.setState({
         isBanana: true,
       });
-      localStorage.setItem('isBanana', JSON.stringify(event.target.checked));
     } else {
       this.setState({
         isBanana: false,
       });
-      localStorage.setItem('isBanana', JSON.stringify(event.target.checked));
     }
+
     event.target.blur();
   };
 
   fieldSwitchHandler = (event) => {
     event.target.blur();
     this.setState({ isFieldLarge: event.target.checked });
+    this.setLocalStorage('isFieldLarge', event.target.checked);
 
     if (event.target.checked) {
       this.setState({
         isFieldLarge: true,
         snakePosition: constants.LARGE_FIELD_STARTING_SNAKE_POSITION,
       });
-      localStorage.setItem(
-        'isFieldLarge',
-        JSON.stringify(event.target.checked),
-      );
     } else {
       this.setState({
         isFieldLarge: false,
         snakePosition: constants.STARTING_SNAKE_POSITION,
       });
-      localStorage.setItem(
-        'isFieldLarge',
-        JSON.stringify(event.target.checked),
-      );
     }
   };
 
   render() {
+    const size = this.state.isFieldLarge ? constants.SIZE / 2 : constants.SIZE;
+
     return (
       <div className={classes.app}>
         <Fullscreen
@@ -498,15 +496,11 @@ class App extends Component {
                 snakePosition={this.state.snakePosition}
                 direction={this.state.direction}
                 isGameOver={this.state.isGameOver}
-                size={
-                  this.state.isFieldLarge ? constants.SIZE / 2 : constants.SIZE
-                }
+                size={size}
               />
               <Fruit
                 fruitPosition={this.state.fruitPosition}
-                size={
-                  this.state.isFieldLarge ? constants.SIZE / 2 : constants.SIZE
-                }
+                size={size}
                 isBanana={this.state.isBanana}
               />
             </div>

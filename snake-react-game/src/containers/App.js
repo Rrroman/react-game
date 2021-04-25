@@ -489,7 +489,7 @@ class App extends Component {
           <div>
             <div
               className={`${classes.app__field} ${
-                this.state.isFullScreen ? classes.app__fullScreen : null
+                this.state.isFullScreen && classes.app__fullScreen
               }`}
             >
               <Snake

@@ -37,21 +37,19 @@ const Controls = ({
     <FullscreenIcon />
   );
 
-  const volumeButton = isFullScreen ? null : (
+  const volumeButton = isFullScreen || (
     <Button variant="contained" color="primary" onClick={volumeToggle}>
       {volumeIcon}
     </Button>
   );
 
-  const musicButton = isFullScreen ? null : (
+  const musicButton = isFullScreen || (
     <Button variant="contained" color="primary" onClick={musicToggle}>
       {musicIcon}
     </Button>
   );
 
-  const settingsButton = isFullScreen ? null : (
-    <Popup className={classes.popup} />
-  );
+  const settingsButton = isFullScreen || <Popup className={classes.popup} />;
 
   return (
     <div className={classes.controls__wrapper}>

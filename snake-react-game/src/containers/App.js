@@ -9,6 +9,24 @@ import biteSound from '../assets/bite.mp3';
 import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 import Footer from '../components/Footer/Footer';
 import Context from '../context/Context';
+import {
+  Container,
+  createMuiTheme,
+  CssBaseline,
+  ThemeProvider,
+} from '@material-ui/core';
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          backgroundColor: '#f5f5ba',
+        },
+      },
+    },
+  },
+});
 
 class App extends Component {
   state = {
@@ -455,38 +473,39 @@ class App extends Component {
     const size = this.state.isFieldLarge ? constants.SIZE / 2 : constants.SIZE;
 
     return (
-      <div className={classes.app}>
-        <Fullscreen
-          enabled={this.state.isFullScreen}
-          onChange={(isFullScreen) => this.setState({ isFullScreen })}
-        >
-          <Context.Provider
-            value={{
-              bestScore: this.state.bestScore,
-              audioVolumeHandler: this.audioVolumeHandler,
-              audioVolume: this.state.audioVolume,
-              lastScores: this.state.lastScores,
-              hardModeHandler: this.hardModeHandler,
-              isHard: this.state.isHard,
-              foodIconSwitchHandler: this.foodIconSwitchHandler,
-              isBanana: this.state.isBanana,
-              fieldSwitchHandler: this.fieldSwitchHandler,
-              isFieldLarge: this.state.isFieldLarge,
-            }}
+      <ThemeProvider theme={theme}>
+        <Container className={classes.app}>
+          <CssBaseline />
+          <Fullscreen
+            enabled={this.state.isFullScreen}
+            onChange={(isFullScreen) => this.setState({ isFullScreen })}
           >
-            <Controls
-              clicked={this.playGameHandler.bind(this)}
-              score={this.state.score}
-              isVolume={this.state.isVolume}
-              isMusic={this.state.isMusic}
-              volumeToggle={this.volumeToggleHandler}
-              musicToggle={this.musicToggleHandler}
-              goFullScreen={this.goFullScreen.bind(this)}
-              isFullScreen={this.state.isFullScreen}
-            />
-          </Context.Provider>
+            <Context.Provider
+              value={{
+                bestScore: this.state.bestScore,
+                audioVolumeHandler: this.audioVolumeHandler,
+                audioVolume: this.state.audioVolume,
+                lastScores: this.state.lastScores,
+                hardModeHandler: this.hardModeHandler,
+                isHard: this.state.isHard,
+                foodIconSwitchHandler: this.foodIconSwitchHandler,
+                isBanana: this.state.isBanana,
+                fieldSwitchHandler: this.fieldSwitchHandler,
+                isFieldLarge: this.state.isFieldLarge,
+              }}
+            >
+              <Controls
+                clicked={this.playGameHandler.bind(this)}
+                score={this.state.score}
+                isVolume={this.state.isVolume}
+                isMusic={this.state.isMusic}
+                volumeToggle={this.volumeToggleHandler}
+                musicToggle={this.musicToggleHandler}
+                goFullScreen={this.goFullScreen.bind(this)}
+                isFullScreen={this.state.isFullScreen}
+              />
+            </Context.Provider>
 
-          <div>
             <div
               className={`${classes.app__field} ${
                 this.state.isFullScreen && classes.app__fullScreen
@@ -504,13 +523,13 @@ class App extends Component {
                 isBanana={this.state.isBanana}
               />
             </div>
-          </div>
-        </Fullscreen>
+          </Fullscreen>
 
-        <MusicPlayer isMusic={this.state.isMusic} />
+          <MusicPlayer isMusic={this.state.isMusic} />
 
-        <Footer />
-      </div>
+          <Footer />
+        </Container>
+      </ThemeProvider>
     );
   }
 }

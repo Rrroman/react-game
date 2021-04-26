@@ -1,9 +1,10 @@
+import { Container } from '@material-ui/core';
 import React from 'react';
 import classes from './MusicPlayer.module.css';
 
 const MusicPlayer = (props) => {
   return (
-    <div
+    <Container
       className={classes.music}
       style={props.isMusic ? { display: 'block' } : { display: 'none' }}
     >
@@ -17,7 +18,7 @@ const MusicPlayer = (props) => {
         allowFullScreen
         className={classes.music__player}
       ></iframe>
-    </div>
+    </Container>
   );
 };
 

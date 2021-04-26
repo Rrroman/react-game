@@ -11,6 +11,7 @@ import ContinuousSlider from './VolumeSlider/VolumeSlider';
 import Switch from './Switch/Switch';
 import FoodSwitch from './Switch/FoodSwitch';
 import FieldSwitch from './Switch/FieldSizeSwitch';
+import { List, ListItemText, Typography } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,38 +84,44 @@ export default function ScrollableTabsButtonAuto(props) {
       <TabPanel value={value} index={0}>
         <div style={{ paddingTop: '20px' }}>
           <ContinuousSlider />
-          <p style={{ marginBottom: 0, fontWeight: 'bold' }}>Game Settings:</p>
+          <Typography style={{ marginBottom: 0, fontWeight: 'bold' }}>
+            Game Settings:
+          </Typography>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Normal</span>
+            <Typography>Normal</Typography>
             <Switch />
-            <span>Hard</span>
+            <Typography>Hard</Typography>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Apple</span>
+            <Typography>Apple</Typography>
             <FoodSwitch />
-            <span>Banana</span>
+            <Typography>Banana</Typography>
           </div>
           <p style={{ marginBottom: 0, fontWeight: 'bold' }}>Field Size:</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Normal</span>
+            <Typography>Normal</Typography>
             <FieldSwitch />
-            <span>Large</span>
+            <Typography>Large</Typography>
           </div>
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h3>Best Score: {scoreContext.bestScore}</h3>
-        <h3>10 Last Scores:</h3>
-        <ul>
+        <Typography variant="h6" component="h2">
+          Best Score: {scoreContext.bestScore}
+        </Typography>
+        <Typography variant="h6" component="h2">
+          10 Last Scores:
+        </Typography>
+        <List>
           {reversedScores.map((score, index) => {
             return (
-              <li key={index}>
+              <ListItemText key={index}>
                 {index + 1}
                 {')'} {score}
-              </li>
+              </ListItemText>
             );
           })}
-        </ul>
+        </List>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Hotkeys />

@@ -1,0 +1,9 @@
+.music {
+  max-width: 500px;
+  height: 155px;
+  margin: 5px auto 0;
+}
+
+.music__player {
+  border-radius: 10px;
+}

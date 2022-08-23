@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  max-width: 600px;
+  padding: 0 10px;
+  margin: 0 auto;
+
+  font-weight: bold;
+  color: #000000;
+}
+
+.footer__logo {
+  margin: 0 10px;
+}
+
+.footer__link {
+  color: inherit;
+  text-decoration: inherit;
+  margin: 0 10px;
+}

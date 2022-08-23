@@ -1,0 +1,17 @@
+.snake__piece {
+  position: absolute;
+  background: radial-gradient(circle 50px, red, yellow 10%, #1e90ff 50%, beige);
+  border-radius: 50%;
+  z-index: 20;
+}
+
+.snake__head {
+  background-image: url('../../assets/tongue-out-compressed.svg');
+  background-position: center center;
+  background-size: 110%;
+  background-repeat: no-repeat;
+}
+
+.snake__head_dead {
+  background-image: url('../../assets/dead-compressed.svg');
+}
